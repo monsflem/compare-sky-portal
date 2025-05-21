@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Provider } from '../types';
@@ -97,7 +96,7 @@ const ComparisonTable = ({ providers, category }: ComparisonTableProps) => {
             {features.unlimitedCalls && <li>✓ Unlimited calls</li>}
             {features.unlimitedTexts && <li>✓ Unlimited texts</li>}
             {features.freeRoaming && <li>✓ Free EU/EEA roaming</li>}
-            {features['5G'] && <li>✓ 5G network</li>}
+            {features["5G"] && <li>✓ 5G network</li>}
           </ul>
         );
         

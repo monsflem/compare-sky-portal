@@ -140,7 +140,7 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: true,
       familyDiscount: true,
-      5G: true,
+      "5G": true, // Added quotes around 5G property name
     },
     url: 'https://www.telenor.no',
     updatedAt: '2023-05-14T15:30:00Z',
@@ -160,7 +160,7 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: true,
       familyDiscount: false,
-      5G: true,
+      "5G": true, // Added quotes around 5G property name
     },
     url: 'https://www.telia.no',
     updatedAt: '2023-05-16T10:45:00Z',
@@ -180,7 +180,7 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: false,
       familyDiscount: true,
-      5G: false,
+      "5G": false, // Added quotes around 5G property name
     },
     url: 'https://www.ice.no',
     updatedAt: '2023-05-19T09:15:00Z',
