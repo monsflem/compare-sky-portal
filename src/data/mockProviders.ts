@@ -50,6 +50,14 @@ export const mockProviders: Provider[] = [
       deductible: 4500,
     },
     url: 'https://www.gjensidige.no',
+    categoryUrls: {
+      insurance: 'https://www.gjensidige.no/forsikring/bil',
+      electricity: 'https://www.gjensidige.no',
+      mobile: 'https://www.gjensidige.no',
+      loans: 'https://www.gjensidige.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-12T14:20:00Z',
   },
   {
@@ -70,6 +78,14 @@ export const mockProviders: Provider[] = [
       deductible: 3500,
     },
     url: 'https://www.tryg.no',
+    categoryUrls: {
+      insurance: 'https://www.tryg.no/forsikring/bilforsikring',
+      electricity: 'https://www.tryg.no',
+      mobile: 'https://www.tryg.no',
+      loans: 'https://www.tryg.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-05-10T10:15:00Z',
   },
   {
@@ -90,6 +106,14 @@ export const mockProviders: Provider[] = [
       deductible: 4000,
     },
     url: 'https://www.fremtind.no',
+    categoryUrls: {
+      insurance: 'https://www.fremtind.no/forsikring/bil',
+      electricity: 'https://www.fremtind.no',
+      mobile: 'https://www.fremtind.no',
+      loans: 'https://www.fremtind.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-01T09:15:00Z',
   },
   {
@@ -110,6 +134,14 @@ export const mockProviders: Provider[] = [
       deductible: 4200,
     },
     url: 'https://www.frende.no',
+    categoryUrls: {
+      insurance: 'https://www.frende.no/forsikring/bilforsikring',
+      electricity: 'https://www.frende.no',
+      mobile: 'https://www.frende.no',
+      loans: 'https://www.frende.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 120 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-05T11:20:00Z',
   },
   {
@@ -130,6 +162,14 @@ export const mockProviders: Provider[] = [
       deductible: 4800,
     },
     url: 'https://www.eika.no',
+    categoryUrls: {
+      insurance: 'https://www.eika.no/forsikring',
+      electricity: 'https://www.eika.no',
+      mobile: 'https://www.eika.no',
+      loans: 'https://www.eika.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-08T15:30:00Z',
   },
   {
@@ -150,6 +190,14 @@ export const mockProviders: Provider[] = [
       deductible: 3700,
     },
     url: 'https://www.codan.no',
+    categoryUrls: {
+      insurance: 'https://www.codan.no/forsikring/bil',
+      electricity: 'https://www.codan.no',
+      mobile: 'https://www.codan.no',
+      loans: 'https://www.codan.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 90 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-10T13:45:00Z',
   },
   {
@@ -170,6 +218,14 @@ export const mockProviders: Provider[] = [
       deductible: 4100,
     },
     url: 'https://www.storebrand.no',
+    categoryUrls: {
+      insurance: 'https://www.storebrand.no/forsikring/bil',
+      electricity: 'https://www.storebrand.no',
+      mobile: 'https://www.storebrand.no',
+      loans: 'https://www.storebrand.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-06-12T10:20:00Z',
   },
   {
@@ -190,6 +246,14 @@ export const mockProviders: Provider[] = [
       deductible: 4300,
     },
     url: 'https://www.watercircles.no',
+    categoryUrls: {
+      insurance: 'https://www.watercircles.no/forsikring',
+      electricity: 'https://www.watercircles.no',
+      mobile: 'https://www.watercircles.no',
+      loans: 'https://www.watercircles.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 180 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-15T09:10:00Z',
   },
   {
@@ -210,6 +274,14 @@ export const mockProviders: Provider[] = [
       deductible: 3900,
     },
     url: 'https://www.klp.no',
+    categoryUrls: {
+      insurance: 'https://www.klp.no/forsikring',
+      electricity: 'https://www.klp.no',
+      mobile: 'https://www.klp.no',
+      loans: 'https://www.klp.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-06-18T14:25:00Z',
   },
   
@@ -231,6 +303,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: true,
     },
     url: 'https://www.tibber.com',
+    categoryUrls: {
+      insurance: 'https://www.tibber.com',
+      electricity: 'https://www.tibber.com/no/stromavtale',
+      mobile: 'https://www.tibber.com',
+      loans: 'https://www.tibber.com',
+    },
+    priceLastUpdated: new Date(Date.now() - 3 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-05-20T09:45:00Z',
   },
   {
@@ -250,6 +330,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.fjordkraft.no',
+    categoryUrls: {
+      insurance: 'https://www.fjordkraft.no',
+      electricity: 'https://www.fjordkraft.no/stromavtale',
+      mobile: 'https://www.fjordkraft.no',
+      loans: 'https://www.fjordkraft.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 20 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-20T10:30:00Z',
   },
   {
@@ -269,6 +357,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.motkraft.no',
+    categoryUrls: {
+      insurance: 'https://www.motkraft.no',
+      electricity: 'https://www.motkraft.no/strom',
+      mobile: 'https://www.motkraft.no',
+      loans: 'https://www.motkraft.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-06-22T11:15:00Z',
   },
   {
@@ -288,6 +384,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: true,
     },
     url: 'https://www.hafslund.no',
+    categoryUrls: {
+      insurance: 'https://www.hafslund.no',
+      electricity: 'https://www.hafslund.no/stromavtale',
+      mobile: 'https://www.hafslund.no',
+      loans: 'https://www.hafslund.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-06-24T14:20:00Z',
   },
   {
@@ -307,6 +411,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.fortum.no',
+    categoryUrls: {
+      insurance: 'https://www.fortum.no',
+      electricity: 'https://www.fortum.no/strom',
+      mobile: 'https://www.fortum.no',
+      loans: 'https://www.fortum.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-17T11:20:00Z',
   },
   {
@@ -326,6 +438,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.ishavskraft.no',
+    categoryUrls: {
+      insurance: 'https://www.ishavskraft.no',
+      electricity: 'https://www.ishavskraft.no/strom',
+      mobile: 'https://www.ishavskraft.no',
+      loans: 'https://www.ishavskraft.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-25T09:40:00Z',
   },
   {
@@ -345,6 +465,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.norgesenergi.no',
+    categoryUrls: {
+      insurance: 'https://www.norgesenergi.no',
+      electricity: 'https://www.norgesenergi.no/stromavtale',
+      mobile: 'https://www.norgesenergi.no',
+      loans: 'https://www.norgesenergi.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-05-18T13:10:00Z',
   },
   {
@@ -364,6 +492,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.ustekveikja.no',
+    categoryUrls: {
+      insurance: 'https://www.ustekveikja.no',
+      electricity: 'https://www.ustekveikja.no/strom',
+      mobile: 'https://www.ustekveikja.no',
+      loans: 'https://www.ustekveikja.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 90 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-28T15:50:00Z',
   },
   {
@@ -383,6 +519,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.los.no',
+    categoryUrls: {
+      insurance: 'https://www.los.no',
+      electricity: 'https://www.los.no/strom',
+      mobile: 'https://www.los.no',
+      loans: 'https://www.los.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-06-30T11:25:00Z',
   },
   {
@@ -402,6 +546,14 @@ export const mockProviders: Provider[] = [
       smartHomeIntegration: false,
     },
     url: 'https://www.polarkraft.no',
+    categoryUrls: {
+      insurance: 'https://www.polarkraft.no',
+      electricity: 'https://www.polarkraft.no/strom',
+      mobile: 'https://www.polarkraft.no',
+      loans: 'https://www.polarkraft.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 6 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-07-02T13:40:00Z',
   },
   
@@ -421,9 +573,17 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: true,
       familyDiscount: true,
-      "5G": true, // Added quotes around 5G property name
+      "5G": true,
     },
     url: 'https://www.telenor.no',
+    categoryUrls: {
+      insurance: 'https://www.telenor.no',
+      electricity: 'https://www.telenor.no',
+      mobile: 'https://www.telenor.no/mobil/abonnement',
+      loans: 'https://www.telenor.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-14T15:30:00Z',
   },
   {
@@ -441,9 +601,17 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: true,
       familyDiscount: false,
-      "5G": true, // Added quotes around 5G property name
+      "5G": true,
     },
     url: 'https://www.telia.no',
+    categoryUrls: {
+      insurance: 'https://www.telia.no',
+      electricity: 'https://www.telia.no',
+      mobile: 'https://www.telia.no/mobil/abonnement',
+      loans: 'https://www.telia.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 22 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-16T10:45:00Z',
   },
   {
@@ -461,9 +629,17 @@ export const mockProviders: Provider[] = [
       unlimitedTexts: true,
       freeRoaming: false,
       familyDiscount: true,
-      "5G": false, // Added quotes around 5G property name
+      "5G": false,
     },
     url: 'https://www.ice.no',
+    categoryUrls: {
+      insurance: 'https://www.ice.no',
+      electricity: 'https://www.ice.no',
+      mobile: 'https://www.ice.no/abonnement',
+      loans: 'https://www.ice.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-19T09:15:00Z',
   },
   {
@@ -484,6 +660,14 @@ export const mockProviders: Provider[] = [
       "5G": true,
     },
     url: 'https://www.onecall.no',
+    categoryUrls: {
+      insurance: 'https://www.onecall.no',
+      electricity: 'https://www.onecall.no',
+      mobile: 'https://www.onecall.no/mobil',
+      loans: 'https://www.onecall.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
+    isLivePrice: true,
     updatedAt: '2023-07-05T11:30:00Z',
   },
   {
@@ -504,6 +688,14 @@ export const mockProviders: Provider[] = [
       "5G": false,
     },
     url: 'https://www.talkmore.no',
+    categoryUrls: {
+      insurance: 'https://www.talkmore.no',
+      electricity: 'https://www.talkmore.no',
+      mobile: 'https://www.talkmore.no/abonnement',
+      loans: 'https://www.talkmore.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-08T14:20:00Z',
   },
   {
@@ -524,6 +716,14 @@ export const mockProviders: Provider[] = [
       "5G": false,
     },
     url: 'https://www.chilimobil.no',
+    categoryUrls: {
+      insurance: 'https://www.chilimobil.no',
+      electricity: 'https://www.chilimobil.no',
+      mobile: 'https://www.chilimobil.no/abonnement',
+      loans: 'https://www.chilimobil.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 75 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-10T09:45:00Z',
   },
   {
@@ -544,6 +744,14 @@ export const mockProviders: Provider[] = [
       "5G": false,
     },
     url: 'https://www.happybytes.no',
+    categoryUrls: {
+      insurance: 'https://www.happybytes.no',
+      electricity: 'https://www.happybytes.no',
+      mobile: 'https://www.happybytes.no/mobil',
+      loans: 'https://www.happybytes.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-12T15:50:00Z',
   },
   {
@@ -564,6 +772,14 @@ export const mockProviders: Provider[] = [
       "5G": false,
     },
     url: 'https://www.mycall.no',
+    categoryUrls: {
+      insurance: 'https://www.mycall.no',
+      electricity: 'https://www.mycall.no',
+      mobile: 'https://www.mycall.no/mobil',
+      loans: 'https://www.mycall.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 120 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-15T10:30:00Z',
   },
   {
@@ -584,6 +800,14 @@ export const mockProviders: Provider[] = [
       "5G": true,
     },
     url: 'https://www.release.no',
+    categoryUrls: {
+      insurance: 'https://www.release.no',
+      electricity: 'https://www.release.no',
+      mobile: 'https://www.release.no/mobilabonnement',
+      loans: 'https://www.release.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 18 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-18T12:40:00Z',
   },
   {
@@ -604,6 +828,14 @@ export const mockProviders: Provider[] = [
       "5G": false,
     },
     url: 'https://www.nortel.no',
+    categoryUrls: {
+      insurance: 'https://www.nortel.no',
+      electricity: 'https://www.nortel.no',
+      mobile: 'https://www.nortel.no/mobil',
+      loans: 'https://www.nortel.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-20T14:15:00Z',
   },
   
@@ -626,6 +858,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.dnb.no',
+    categoryUrls: {
+      insurance: 'https://www.dnb.no/forsikring',
+      electricity: 'https://www.dnb.no',
+      mobile: 'https://www.dnb.no',
+      loans: 'https://www.dnb.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-11T14:25:00Z',
   },
   {
@@ -646,6 +886,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.nordea.no',
+    categoryUrls: {
+      insurance: 'https://www.nordea.no/forsikring',
+      electricity: 'https://www.nordea.no',
+      mobile: 'https://www.nordea.no',
+      loans: 'https://www.nordea.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-05-13T11:35:00Z',
   },
   {
@@ -666,6 +914,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.santander.no',
+    categoryUrls: {
+      insurance: 'https://www.santander.no',
+      electricity: 'https://www.santander.no',
+      mobile: 'https://www.santander.no',
+      loans: 'https://www.santander.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 65 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-22T10:20:00Z',
   },
   {
@@ -686,6 +942,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.komplettbank.no',
+    categoryUrls: {
+      insurance: 'https://www.komplettbank.no',
+      electricity: 'https://www.komplettbank.no',
+      mobile: 'https://www.komplettbank.no',
+      loans: 'https://www.komplettbank.no/forbrukslan',
+    },
+    priceLastUpdated: new Date(Date.now() - 90 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-25T13:40:00Z',
   },
   {
@@ -706,6 +970,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.instabank.no',
+    categoryUrls: {
+      insurance: 'https://www.instabank.no',
+      electricity: 'https://www.instabank.no',
+      mobile: 'https://www.instabank.no',
+      loans: 'https://www.instabank.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 55 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-28T11:30:00Z',
   },
   {
@@ -726,6 +998,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.banknorwegian.no',
+    categoryUrls: {
+      insurance: 'https://www.banknorwegian.no',
+      electricity: 'https://www.banknorwegian.no',
+      mobile: 'https://www.banknorwegian.no',
+      loans: 'https://www.banknorwegian.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 70 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-07-30T15:20:00Z',
   },
   {
@@ -746,6 +1026,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.yabank.no',
+    categoryUrls: {
+      insurance: 'https://www.yabank.no',
+      electricity: 'https://www.yabank.no',
+      mobile: 'https://www.yabank.no',
+      loans: 'https://www.yabank.no/forbrukslan',
+    },
+    priceLastUpdated: new Date(Date.now() - 100 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-08-02T09:15:00Z',
   },
   {
@@ -766,6 +1054,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.sveafinans.no',
+    categoryUrls: {
+      insurance: 'https://www.sveafinans.no',
+      electricity: 'https://www.sveafinans.no',
+      mobile: 'https://www.sveafinans.no',
+      loans: 'https://www.sveafinans.no/privatlan',
+    },
+    priceLastUpdated: new Date(Date.now() - 110 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-08-05T14:35:00Z',
   },
   {
@@ -786,6 +1082,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.bnbank.no',
+    categoryUrls: {
+      insurance: 'https://www.bnbank.no',
+      electricity: 'https://www.bnbank.no',
+      mobile: 'https://www.bnbank.no',
+      loans: 'https://www.bnbank.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-08-08T10:50:00Z',
   },
   {
@@ -806,6 +1110,14 @@ export const mockProviders: Provider[] = [
       flexibleTerms: true,
     },
     url: 'https://www.ikanobank.no',
+    categoryUrls: {
+      insurance: 'https://www.ikanobank.no',
+      electricity: 'https://www.ikanobank.no',
+      mobile: 'https://www.ikanobank.no',
+      loans: 'https://www.ikanobank.no/lan',
+    },
+    priceLastUpdated: new Date(Date.now() - 80 * 60 * 1000).toISOString(),
+    isLivePrice: false,
     updatedAt: '2023-08-10T13:25:00Z',
   },
 ];
