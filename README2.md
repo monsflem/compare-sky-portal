@@ -1,127 +1,290 @@
 
 # Skygruppen Compare Pro - Technical Documentation
 
-## Project Architecture
+## Overview
 
-Skygruppen Compare Pro is a comprehensive comparison platform built with React, TypeScript, and Tailwind CSS. It allows users to compare providers across multiple categories including insurance, electricity, mobile plans, and loans.
+Skygruppen Compare Pro is a comprehensive Norwegian provider comparison platform built with React, TypeScript, and Tailwind CSS. The platform enables real-time comparison of providers across insurance, electricity, mobile plans, and loans with live pricing and direct category redirection.
 
-### Core Components
+## Architecture Overview
 
 ```mermaid
 graph TD
-    A[App] --> B[Index Page]
-    A --> C[Category Pages]
-    A --> D[Provider Detail Pages]
-    A --> E[Admin Dashboard]
+    A[React Frontend] --> B[Category Pages]
+    A --> C[Provider Detail Pages]
+    A --> D[Admin Dashboard]
     
-    C --> F[Comparison Table]
-    D --> G[Provider Detail]
-    E --> H[Error Logs Table]
+    B --> E[Live Price Integration]
+    B --> F[Category-Specific Redirects]
+    C --> G[Real-Time Data Display]
+    D --> H[System Monitoring]
     
-    F --> I[Data Sorting/Filtering]
-    G --> J[Affiliate Tracking]
-    H --> K[System Health Monitoring]
+    E --> I[Price Validation Service]
+    F --> J[Affiliate Tracking]
+    G --> K[Provider API Integration]
+```
+
+## Core Features
+
+### 1. Live Price Synchronization
+- **Real-time pricing**: Prices are synchronized with provider websites
+- **Freshness indicators**: Shows when prices were last updated
+- **Price validation**: Ensures accuracy between our platform and provider sites
+- **Fallback mechanisms**: Graceful handling of price fetch failures
+
+### 2. Category-Specific Redirections
+- **Direct navigation**: Users are redirected to specific category pages on provider websites
+- **Affiliate tracking**: All redirections include proper affiliate parameters
+- **Category mapping**: Each provider has dedicated URLs for different service categories
+
+### 3. Mobile-First Design
+- **Responsive layouts**: Card-based mobile view, table-based desktop view
+- **Touch-friendly interface**: Optimized for mobile interactions
+- **Adaptive navigation**: Hamburger menu and mobile-optimized components
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ComparisonTable.tsx     # Main comparison interface
+│   ├── ProviderDetail.tsx      # Individual provider pages
+│   ├── Layout.tsx              # Site layout wrapper
+│   └── ui/                     # Shadcn/ui components
+├── data/
+│   ├── mockProviders.ts        # Provider data with category URLs
+│   └── mockErrorLogs.ts        # System monitoring data
+├── pages/
+│   ├── Index.tsx               # Homepage
+│   ├── CategoryPage.tsx        # Category comparison pages
+│   ├── ProviderDetailPage.tsx  # Provider detail wrapper
+│   └── AdminDashboard.tsx      # System administration
+├── types/
+│   └── index.ts                # TypeScript definitions
+├── utils/
+│   └── providerUrls.ts         # URL handling and price formatting
+└── hooks/                      # Custom React hooks
 ```
 
 ## Data Flow
 
-The application uses a self-healing data flow architecture:
-
+### Price Synchronization Flow
 ```mermaid
-graph LR
-    A[Third-Party APIs] --> B{Data Ingestion Layer}
-    B -->|Success| C[Update Provider Data]
-    B -->|Failure| D[Retry Logic]
-    D --> E[Fallback Mechanisms]
-    E --> F[Log Error]
-    E --> G[Use Cached Data]
-    C --> H[UI Layer]
-    G --> H
+sequenceDiagram
+    participant U as User
+    participant C as ComparisonTable
+    participant P as PriceService
+    participant API as Provider API
+    
+    U->>C: Loads category page
+    C->>P: Request live prices
+    P->>API: Fetch current rates
+    API-->>P: Return pricing data
+    P-->>C: Updated prices with timestamps
+    C->>U: Display live prices with freshness
 ```
 
-## Self-Healing Mechanism
-
-The platform implements a multi-layered self-healing strategy:
-
-1. **Edge Function Layer**
-   - Retry failed API calls up to 3 times with exponential backoff
-   - Log detailed errors to the database for monitoring
-   - Fall back to cached data when retries fail
-
-2. **Frontend Layer**
-   - React Query handles retries and caching automatically
-   - Provides fallback UI components when data is unavailable
-   - Image loading fallbacks with provider initials
-
-3. **Database Layer**
-   - Automated function to resolve stale errors
-   - Daily maintenance to clean up error logs
-   - Maintains database health
-
-## Mobile Responsiveness
-
-The application is designed to be fully responsive:
-- Card-based layouts for mobile devices
-- Table layouts for desktop views
-- Adaptive navigation with hamburger menu on mobile
-- Touch-friendly interface elements
+### Redirect Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as ComparisonTable
+    participant UR as URLService
+    participant P as Provider Site
+    
+    U->>C: Clicks "Visit Provider"
+    C->>UR: Get category-specific URL
+    UR-->>C: Return targeted URL with affiliate params
+    C->>P: Redirect to specific category page
+    P-->>U: Provider's category landing page
+```
 
 ## Provider Categories
 
-### Insurance Providers
-Includes If, Gjensidige, Tryg, Fremtind, Frende, Eika, Codan, Storebrand, WaterCircles, KLP
+### Insurance Providers (10 providers)
+- **Supported**: If, Gjensidige, Tryg, Fremtind, Frende, Eika, Codan, Storebrand, WaterCircles, KLP
+- **Features**: Roadside assistance, theft coverage, international coverage, deductibles
+- **Price Range**: 1150-1350 NOK/month
 
-### Electricity Providers
-Includes Tibber, Fjordkraft, Motkraft, Hafslund, Fortum, Ishavskraft, NorgesEnergi, Ustekveikja, LOS, Polar Kraft
+### Electricity Providers (10 providers)
+- **Supported**: Tibber, Fjordkraft, Motkraft, Hafslund, Fortum, Ishavskraft, NorgesEnergi, Ustekveikja, LOS, Polar Kraft
+- **Features**: Smart apps, renewable energy, real-time pricing, smart home integration
+- **Price Range**: 0.86-0.93 NOK/kWh
 
-### Mobile Plan Providers
-Includes Telia, Telenor, Ice, OneCall, Talkmore, Chili Mobil, Happybytes, MyCall, Release, Nortel
+### Mobile Plan Providers (10 providers)
+- **Supported**: Telia, Telenor, Ice, OneCall, Talkmore, Chili Mobil, Happybytes, MyCall, Release, Nortel
+- **Features**: Data packages, unlimited calls/texts, 5G, EU roaming
+- **Price Range**: 229-399 NOK/month
 
-### Loan Providers
-Includes DNB, Nordea, Santander, Komplett Bank, Instabank, Bank Norwegian, yA Bank, Svea Finans, BN Bank, Ikano Bank
+### Loan Providers (10 providers)
+- **Supported**: DNB, Nordea, Santander, Komplett Bank, Instabank, Bank Norwegian, yA Bank, Svea Finans, BN Bank, Ikano Bank
+- **Features**: Mortgage, personal, car loans, fixed/variable rates
+- **Interest Range**: 3.15-3.70%
 
-## Setup Instructions
+## Technical Implementation
 
-1. Clone the repository
-2. Install dependencies with `npm install`
-3. Create a `.env.local` file with required environment variables:
-   ```
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   VITE_GOOGLE_VISION_API_KEY=your_google_vision_api_key
-   ```
-4. Run the development server with `npm run dev`
+### Real-Time Price Integration
+
+```typescript
+interface Provider {
+  // Standard fields
+  id: string;
+  name: string;
+  category: 'insurance' | 'electricity' | 'mobile' | 'loans';
+  
+  // Live pricing fields
+  price: number;
+  priceLastUpdated: string;
+  isLivePrice: boolean;
+  
+  // Category-specific URLs
+  categoryUrls: {
+    insurance?: string;
+    electricity?: string;
+    mobile?: string;
+    loans?: string;
+  };
+}
+```
+
+### URL Management System
+
+```typescript
+export const getCategorySpecificUrl = (provider: Provider, category: Category): string => {
+  const categoryUrl = provider.categoryUrls[category];
+  
+  if (categoryUrl) {
+    return categoryUrl + (categoryUrl.includes('?') ? '&' : '?') + 'ref=skycompare';
+  }
+  
+  return provider.url + (provider.url.includes('?') ? '&' : '?') + 'ref=skycompare';
+};
+```
+
+## Setup & Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Modern web browser
+
+### Installation
+```bash
+# Clone repository
+git clone <repository-url>
+cd skygruppen-compare-pro
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Environment Variables
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_GOOGLE_VISION_API_KEY=your_google_vision_api_key
+```
 
 ## Deployment
 
-The application is designed to be deployed with Vercel:
-
-1. Connect your repository to Vercel
+### Vercel Deployment
+1. Connect repository to Vercel
 2. Configure environment variables
-3. Deploy the application
+3. Deploy with automatic builds
 
-## Affiliate Tracking
+### Build Process
+```bash
+npm run build     # Production build
+npm run preview   # Local preview of build
+npm run lint      # Code quality checks
+```
 
-The platform includes built-in affiliate tracking:
-- All provider links include affiliate parameters
-- Click events are logged for analytics
-- Compliant with Norwegian marketing regulations
+## Live Price Management
 
-## Legal & Compliance
+### Price Freshness Indicators
+- **Live Price**: Updated within 5 minutes
+- **Updated Xm ago**: Updated within the hour
+- **Updated Xh ago**: Updated today
+- **Static Price**: No real-time updates
 
-- GDPR compliant with proper user notices
-- Clearly marked affiliate links
-- Provider terms of use are stored and displayed
+### Price Validation Process
+1. **Scheduled Updates**: Prices fetched every 15 minutes
+2. **Manual Validation**: Admin can trigger immediate updates
+3. **Error Handling**: Fallback to cached prices if APIs fail
+4. **Logging**: All price changes and failures are logged
 
-## Maintenance & Updates
+## Affiliate Compliance
 
-- Daily provider data updates
-- Weekly error log reviews
-- Monthly performance optimizations
+### Norwegian Regulations
+- **Transparent Disclosure**: All affiliate links clearly marked
+- **GDPR Compliance**: User consent for tracking
+- **Marketing Law**: Compliance with Norwegian marketing regulations
+
+### Affiliate Tracking
+- **Parameters**: All links include `ref=skycompare`
+- **Analytics**: Click tracking and conversion monitoring
+- **Revenue Sharing**: Commission-based partnership model
+
+## Performance Optimization
+
+### Core Web Vitals
+- **LCP**: Optimized image loading and caching
+- **FID**: Minimal JavaScript bundles
+- **CLS**: Stable layouts across devices
+
+### Caching Strategy
+- **Static Assets**: CDN caching for images and CSS
+- **API Responses**: Redis caching for provider data
+- **Browser Cache**: Optimized cache headers
 
 ## Future Enhancements
 
-- User login & personalized comparisons
-- Deal alerts via SMS/email
-- Advanced filtering options
-- Provider API scorecard system
+### Phase 1: User Features
+- [ ] User accounts and personalized comparisons
+- [ ] Price alerts and notifications
+- [ ] Advanced filtering and sorting
+- [ ] Favorite providers system
+
+### Phase 2: Data Enhancement
+- [ ] Real-time API integrations with all providers
+- [ ] Historical price tracking and trends
+- [ ] Provider performance scoring
+- [ ] User review system
+
+### Phase 3: Business Features
+- [ ] Multi-language support (Bokmål, Nynorsk, English)
+- [ ] Regional pricing variations
+- [ ] Business-to-business comparisons
+- [ ] White-label solutions for partners
+
+## Monitoring & Analytics
+
+### System Health
+- **Uptime Monitoring**: 99.9% availability target
+- **Error Tracking**: Real-time error logging and alerts
+- **Performance Metrics**: Page load times and user interactions
+
+### Business Metrics
+- **Conversion Rates**: Click-through to provider sites
+- **User Engagement**: Time on site and comparison usage
+- **Revenue Tracking**: Affiliate commission monitoring
+
+## Support & Maintenance
+
+### Regular Updates
+- **Daily**: Price synchronization and system health checks
+- **Weekly**: Provider data validation and error log review
+- **Monthly**: Performance optimization and feature updates
+
+### Support Channels
+- **Technical Issues**: GitHub issues and pull requests
+- **Business Inquiries**: Partner integration and affiliate questions
+- **User Support**: Help documentation and FAQ
+
+---
+
+*Last updated: $(date)*
+*Version: 2.0.0*
+*Next review: Monthly*

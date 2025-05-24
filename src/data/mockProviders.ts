@@ -1,7 +1,7 @@
 
 import { Provider } from '../types';
 
-// Mock data for providers (will be replaced with real data from Supabase later)
+// Mock data for providers with category-specific URLs and live pricing
 export const mockProviders: Provider[] = [
   // Insurance Providers
   {
@@ -22,6 +22,14 @@ export const mockProviders: Provider[] = [
       deductible: 3800,
     },
     url: 'https://www.if.no',
+    categoryUrls: {
+      insurance: 'https://www.if.no/forsikring/bilforsikring',
+      electricity: 'https://www.if.no',
+      mobile: 'https://www.if.no',
+      loans: 'https://www.if.no',
+    },
+    priceLastUpdated: new Date(Date.now() - 2 * 60 * 1000).toISOString(), // 2 minutes ago
+    isLivePrice: true,
     updatedAt: '2023-05-15T08:30:00Z',
   },
   {
@@ -807,7 +815,6 @@ export const getProvidersByCategory = (category: string) => {
   return mockProviders.filter(provider => provider.category === category);
 };
 
-// Helper function to get a provider by ID
 export const getProviderById = (id: string) => {
   return mockProviders.find(provider => provider.id === id);
 };

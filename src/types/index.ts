@@ -10,6 +10,14 @@ export interface Provider {
   description: string;
   features: Record<string, any>;
   url: string;
+  categoryUrls: {
+    insurance?: string;
+    electricity?: string;
+    mobile?: string;
+    loans?: string;
+  };
+  priceLastUpdated: string;
+  isLivePrice: boolean;
   updatedAt: string;
 }
 

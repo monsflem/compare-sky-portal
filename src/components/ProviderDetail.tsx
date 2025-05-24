@@ -1,9 +1,11 @@
-
 import React from 'react';
 import { Provider } from '../types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
+import { Clock } from 'lucide-react';
+import { getCategorySpecificUrl, formatPriceWithFreshness } from '../utils/providerUrls';
 
 interface ProviderDetailProps {
   provider: Provider;
@@ -11,18 +13,13 @@ interface ProviderDetailProps {
 
 const ProviderDetail = ({ provider }: ProviderDetailProps) => {
   const handleAffiliateClick = () => {
-    // This would be replaced with an actual API call to log clicks
-    console.log(`Clicked on ${provider.name} affiliate link from detail page`);
+    console.log(`Clicked on ${provider.name} affiliate link from detail page for ${provider.category}`);
     
-    // Show a toast notification
-    toast.success(`Redirecting you to ${provider.name}...`);
+    toast.success(`Redirecting you to ${provider.name}'s ${provider.category} section...`);
     
-    // In a real implementation, we would log the click to the database
-    // and then redirect the user
     setTimeout(() => {
-      // Add the ref parameter to the URL
-      const affiliateUrl = provider.url + (provider.url.includes('?') ? '&' : '?') + 'ref=skycompare';
-      window.open(affiliateUrl, '_blank');
+      const categoryUrl = getCategorySpecificUrl(provider, provider.category);
+      window.open(categoryUrl, '_blank');
     }, 500);
   };
 
@@ -129,6 +126,8 @@ const ProviderDetail = ({ provider }: ProviderDetailProps) => {
     }
   };
 
+  const { priceText, freshnessIndicator } = formatPriceWithFreshness(provider);
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between">
@@ -159,7 +158,7 @@ const ProviderDetail = ({ provider }: ProviderDetailProps) => {
           className="bg-sky-600 hover:bg-sky-700 md:w-auto w-full"
           onClick={handleAffiliateClick}
         >
-          Visit Provider
+          Visit {provider.category.charAt(0).toUpperCase() + provider.category.slice(1)} Section
         </Button>
       </div>
 
@@ -172,7 +171,15 @@ const ProviderDetail = ({ provider }: ProviderDetailProps) => {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
             <div className="mb-4 md:mb-0">
               <span className="font-medium text-slate-900">Price:</span>
-              <span className="text-xl ml-2 text-sky-600 font-semibold">{provider.price} {provider.priceUnit}</span>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-xl text-sky-600 font-semibold">{priceText}</span>
+                {provider.isLivePrice && (
+                  <Badge variant="secondary" className="bg-green-50 text-green-700 text-xs flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {freshnessIndicator}
+                  </Badge>
+                )}
+              </div>
             </div>
             <div className="bg-sky-50 text-sky-800 px-3 py-1 rounded-full text-sm">
               Last updated: {new Date(provider.updatedAt).toLocaleDateString()}

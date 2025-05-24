@@ -13,7 +13,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from 'sonner';
-import { ChevronUp, ChevronDown, ExternalLink } from 'lucide-react';
+import { ChevronUp, ChevronDown, ExternalLink, Clock } from 'lucide-react';
+import { getCategorySpecificUrl, formatPriceWithFreshness } from '../utils/providerUrls';
 
 interface ComparisonTableProps {
   providers: Provider[];
@@ -47,18 +48,13 @@ const ComparisonTable = ({ providers, category }: ComparisonTableProps) => {
   };
 
   const handleAffiliateClick = (provider: Provider) => {
-    // This will be replaced with an actual API call to log clicks
-    console.log(`Clicked on ${provider.name} affiliate link`);
+    console.log(`Clicked on ${provider.name} affiliate link for ${category} category`);
     
-    // Show a toast notification
-    toast.success(`Redirecting you to ${provider.name}...`);
+    toast.success(`Redirecting you to ${provider.name}'s ${category} section...`);
     
-    // In a real implementation, we would log the click to the database
-    // and then redirect the user
     setTimeout(() => {
-      // Add the ref parameter to the URL
-      const affiliateUrl = provider.url + (provider.url.includes('?') ? '&' : '?') + 'ref=skycompare';
-      window.open(affiliateUrl, '_blank');
+      const categoryUrl = getCategorySpecificUrl(provider, category as any);
+      window.open(categoryUrl, '_blank');
     }, 500);
   };
 
@@ -122,51 +118,63 @@ const ComparisonTable = ({ providers, category }: ComparisonTableProps) => {
   };
 
   const formatPrice = (provider: Provider) => {
-    return `${provider.price} ${provider.priceUnit}`;
+    const { priceText, freshnessIndicator } = formatPriceWithFreshness(provider);
+    return { priceText, freshnessIndicator };
   };
 
   // Mobile card view for smaller screens
-  const renderMobileCard = (provider: Provider) => (
-    <div className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-slate-100">
-      <div className="flex items-center mb-3">
-        <div className="w-[60px] h-[40px] flex items-center justify-center bg-gray-100 rounded mr-3">
-          <img 
-            src={provider.logo} 
-            alt={`${provider.name} logo`} 
-            className="max-w-[50px] max-h-[30px] object-contain" 
-            onError={(e) => {
-              // Fallback for image loading errors
-              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${provider.name}&background=random&color=fff`;
-            }}
-          />
-        </div>
-        <div>
-          <Link to={`/providers/${provider.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
-            {provider.name}
-          </Link>
-          <div className="flex items-center mt-1">
-            <Badge variant="outline" className="bg-sky-50 text-sky-800">
-              {provider.rating} ★
-            </Badge>
+  const renderMobileCard = (provider: Provider) => {
+    const { priceText, freshnessIndicator } = formatPrice(provider);
+    
+    return (
+      <div className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-slate-100">
+        <div className="flex items-center mb-3">
+          <div className="w-[60px] h-[40px] flex items-center justify-center bg-gray-100 rounded mr-3">
+            <img 
+              src={provider.logo} 
+              alt={`${provider.name} logo`} 
+              className="max-w-[50px] max-h-[30px] object-contain" 
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${provider.name}&background=random&color=fff`;
+              }}
+            />
+          </div>
+          <div>
+            <Link to={`/providers/${provider.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
+              {provider.name}
+            </Link>
+            <div className="flex items-center mt-1">
+              <Badge variant="outline" className="bg-sky-50 text-sky-800">
+                {provider.rating} ★
+              </Badge>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div className="mb-3">
-        <div className="text-lg font-semibold text-sky-600">{formatPrice(provider)}</div>
-        <div className="mt-2">
-          {getFeaturesForCategory(provider)}
+        
+        <div className="mb-3">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="text-lg font-semibold text-sky-600">{priceText}</div>
+            {provider.isLivePrice && (
+              <Badge variant="secondary" className="bg-green-50 text-green-700 text-xs flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {freshnessIndicator}
+              </Badge>
+            )}
+          </div>
+          <div className="mt-2">
+            {getFeaturesForCategory(provider)}
+          </div>
         </div>
+        
+        <Button 
+          className="w-full bg-sky-600 hover:bg-sky-700 mt-2 flex items-center justify-center"
+          onClick={() => handleAffiliateClick(provider)}
+        >
+          Visit {category.charAt(0).toUpperCase() + category.slice(1)} Section <ExternalLink className="ml-2 h-4 w-4" />
+        </Button>
       </div>
-      
-      <Button 
-        className="w-full bg-sky-600 hover:bg-sky-700 mt-2 flex items-center justify-center"
-        onClick={() => handleAffiliateClick(provider)}
-      >
-        Visit Provider <ExternalLink className="ml-2 h-4 w-4" />
-      </Button>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -185,7 +193,7 @@ const ComparisonTable = ({ providers, category }: ComparisonTableProps) => {
                 className="cursor-pointer hover:text-sky-600" 
                 onClick={() => handleSort('price')}
               >
-                Price {getSortIcon('price')}
+                Live Price {getSortIcon('price')}
               </TableHead>
               <TableHead 
                 className="cursor-pointer hover:text-sky-600"
@@ -198,46 +206,59 @@ const ComparisonTable = ({ providers, category }: ComparisonTableProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sortedProviders.map((provider) => (
-              <TableRow key={provider.id} className="animate-fade-in">
-                <TableCell className="font-medium">
-                  <div className="flex items-center">
-                    <div className="w-[60px] h-[40px] flex items-center justify-center bg-gray-100 rounded mr-3">
-                      <img 
-                        src={provider.logo} 
-                        alt={`${provider.name} logo`} 
-                        className="max-w-[50px] max-h-[30px] object-contain" 
-                        onError={(e) => {
-                          // Fallback for image loading errors
-                          (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${provider.name}&background=random&color=fff`;
-                        }}
-                      />
+            {sortedProviders.map((provider) => {
+              const { priceText, freshnessIndicator } = formatPrice(provider);
+              
+              return (
+                <TableRow key={provider.id} className="animate-fade-in">
+                  <TableCell className="font-medium">
+                    <div className="flex items-center">
+                      <div className="w-[60px] h-[40px] flex items-center justify-center bg-gray-100 rounded mr-3">
+                        <img 
+                          src={provider.logo} 
+                          alt={`${provider.name} logo`} 
+                          className="max-w-[50px] max-h-[30px] object-contain" 
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${provider.name}&background=random&color=fff`;
+                          }}
+                        />
+                      </div>
+                      <Link to={`/providers/${provider.id}`} className="hover:text-sky-600 font-semibold">
+                        {provider.name}
+                      </Link>
                     </div>
-                    <Link to={`/providers/${provider.id}`} className="hover:text-sky-600 font-semibold">
-                      {provider.name}
-                    </Link>
-                  </div>
-                </TableCell>
-                <TableCell className="font-medium">{formatPrice(provider)}</TableCell>
-                <TableCell>
-                  <div className="flex items-center">
-                    <Badge variant="outline" className="bg-amber-50 text-amber-800">
-                      <span className="font-medium mr-1">{provider.rating}</span>
-                      <span className="text-yellow-500">★</span>
-                    </Badge>
-                  </div>
-                </TableCell>
-                <TableCell>{getFeaturesForCategory(provider)}</TableCell>
-                <TableCell className="text-right">
-                  <Button 
-                    className="bg-sky-600 hover:bg-sky-700"
-                    onClick={() => handleAffiliateClick(provider)}
-                  >
-                    Visit Provider
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    <div className="flex flex-col">
+                      <span>{priceText}</span>
+                      {provider.isLivePrice && (
+                        <Badge variant="secondary" className="bg-green-50 text-green-700 text-xs flex items-center gap-1 w-fit mt-1">
+                          <Clock className="h-3 w-3" />
+                          {freshnessIndicator}
+                        </Badge>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center">
+                      <Badge variant="outline" className="bg-amber-50 text-amber-800">
+                        <span className="font-medium mr-1">{provider.rating}</span>
+                        <span className="text-yellow-500">★</span>
+                      </Badge>
+                    </div>
+                  </TableCell>
+                  <TableCell>{getFeaturesForCategory(provider)}</TableCell>
+                  <TableCell className="text-right">
+                    <Button 
+                      className="bg-sky-600 hover:bg-sky-700"
+                      onClick={() => handleAffiliateClick(provider)}
+                    >
+                      Visit {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
