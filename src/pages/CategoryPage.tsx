@@ -3,9 +3,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ComparisonTable from '../components/ComparisonTable';
+import LivePriceIndicator from '../components/LivePriceIndicator';
 import { Category } from '../types';
-import { getProvidersByCategory } from '../data/mockProviders';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useLiveData } from '../hooks/useLiveData';
 
 const getCategoryTitle = (category: string): string => {
   switch (category) {
@@ -29,7 +30,7 @@ const getCategoryDescription = (category: string): string => {
     case 'electricity':
       return 'Find the best electricity rates and providers with transparent pricing. Compare fixed and variable rates, renewable energy options, and more.';
     case 'mobile':
-      return 'Compare mobile plans and find the best coverage for your needs. Our comparison includes data packages, calling minutes, and additional features.';
+      return 'Compare mobile plans and find the best coverage for your needs. Our comparison includes data packages, calling minutes, and additional features with live pricing.';
     case 'loans':
       return 'Find the best loan rates and terms from Norway\'s leading banks. Compare mortgage, personal, car, and student loan options.';
     default:
@@ -40,12 +41,12 @@ const getCategoryDescription = (category: string): string => {
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   
-  // Validate category and get providers
+  // Validate category and get providers with live data
   const validCategory = ['insurance', 'electricity', 'mobile', 'loans'].includes(category || '') 
     ? (category as Category) 
     : null;
     
-  const providers = validCategory ? getProvidersByCategory(validCategory) : [];
+  const { providers, isUpdating, lastUpdate, error, refreshPrices } = useLiveData(validCategory || 'mobile');
   
   const title = validCategory ? getCategoryTitle(validCategory) : 'Category Not Found';
   const description = validCategory ? getCategoryDescription(validCategory) : '';
@@ -76,7 +77,27 @@ const CategoryPage = () => {
       
       <div className="container-custom py-8">
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl font-semibold mb-6">Compare {title}</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold mb-4 sm:mb-0">Compare {title}</h2>
+            {validCategory === 'mobile' && (
+              <LivePriceIndicator
+                isUpdating={isUpdating}
+                lastUpdate={lastUpdate}
+                error={error}
+                onRefresh={refreshPrices}
+              />
+            )}
+          </div>
+          
+          {error && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertTitle>Prisoppdatering feilet</AlertTitle>
+              <AlertDescription>
+                Vi kunne ikke hente de nyeste prisene. Prisene som vises kan være utdaterte.
+              </AlertDescription>
+            </Alert>
+          )}
+          
           <ComparisonTable providers={providers} category={validCategory} />
         </div>
         
