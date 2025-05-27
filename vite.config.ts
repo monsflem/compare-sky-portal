@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/offer-radar-view/", // 👈 viktig for GitHub Pages
+  base: "/compare-sky-portal/", // 👈 viktig for GitHub Pages
   server: {
     host: "::",
     port: 8080,
