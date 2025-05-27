@@ -15,6 +15,23 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <script>
+      // Redirect if loaded on a non-root URL (GitHub Pages SPA fix)
+      (function () {
+        const basePath = "/compare-sky-portal/";
+        if (
+          window.location.pathname !== basePath &&
+          !window.location.pathname.startsWith(basePath)
+        ) {
+          window.history.replaceState(
+            {},
+            "",
+            basePath + window.location.pathname.replace(/^\/+/, "")
+          );
+        }
+      })();
+    </script>
   </head>
 
   <body>
