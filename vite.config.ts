@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { viteStaticCopy } from "vite-plugin-static-copy"; // 👈 NYTT
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/compare-sky-portal/' : '/',
@@ -24,12 +24,12 @@ export default defineConfig(({ mode }) => ({
     viteStaticCopy({
       targets: [
         {
-          src: 'dist/index.html', // 👈 denne kopieres etter build
+          src: 'dist/index.html',
           dest: '',
           rename: '404.html',
         },
       ],
-      hook: 'writeBundle', // 👈 viktig: kopier etter at alt er skrevet
+      hook: 'writeBundle',
     })
   ],
   resolve: {
