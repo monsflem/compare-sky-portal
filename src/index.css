@@ -92,7 +92,7 @@
   }
 
   body {
-    @apply bg-white text-slate-900 font-sans;
+    @apply bg-gradient-to-br from-sky-50 via-white to-blue-50 text-slate-900 font-sans min-h-screen;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -106,15 +106,20 @@
   }
   
   .btn-primary {
-    @apply bg-sky-600 hover:bg-sky-700 text-white py-2 px-4 rounded transition-colors;
+    @apply bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
   }
   
   .btn-secondary {
-    @apply bg-white border border-slate-200 hover:border-slate-300 text-slate-800 py-2 px-4 rounded transition-colors;
+    @apply bg-white border border-slate-200 hover:border-sky-300 hover:bg-sky-50 text-slate-800 py-2 px-4 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md;
   }
   
   .hero-section {
-    @apply bg-slate-900 text-white py-16;
+    @apply bg-gradient-to-br from-slate-900 via-sky-900 to-blue-900 text-white py-16 relative overflow-hidden;
+  }
+  
+  .hero-section::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-sky-600/20 to-blue-600/20;
   }
   
   .section {
@@ -122,6 +127,63 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl;
+  }
+
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/30 rounded-xl shadow-lg;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  .live-indicator {
+    @apply relative;
+  }
+
+  .live-indicator::before {
+    content: '';
+    @apply absolute -left-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-green-500 rounded-full animate-pulse;
+  }
+
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    @apply absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-12 animate-[shimmer_2s_infinite];
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 640px) {
+  .hero-section {
+    @apply py-12;
+  }
+  
+  .container-custom {
+    @apply px-3;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900;
+  }
+}
+
+/* Print styles */
+@media print {
+  .hero-section,
+  .card-hover {
+    @apply shadow-none bg-white;
   }
 }
