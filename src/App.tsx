@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,8 +12,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 3, // Part of self-healing strategy - retry failed queries
-      staleTime: 1000 * 60 * 10, // 10 minutes
+      retry: 3,
+      staleTime: 1000 * 60 * 10,
     },
   },
 });
@@ -24,7 +23,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/compare-sky-portal">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/categories/:category" element={<CategoryPage />} />
