@@ -1,4 +1,3 @@
-
 import { Provider } from '../../types';
 
 export const loanProviders: Provider[] = [
@@ -34,7 +33,7 @@ export const loanProviders: Provider[] = [
     id: '32',
     name: 'Nordea',
     category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=Nordea',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Nordea_logo.svg',
     price: 3.25,
     priceUnit: '% interest',
     rating: 4.5,
@@ -62,7 +61,7 @@ export const loanProviders: Provider[] = [
     id: '33',
     name: 'Santander',
     category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=Santander',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Banco_Santander_Logotipo.svg',
     price: 3.40,
     priceUnit: '% interest',
     rating: 4.2,
@@ -146,7 +145,7 @@ export const loanProviders: Provider[] = [
     id: '36',
     name: 'Bank Norwegian',
     category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=BankNorwegian',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Bank_Norwegian_logo.png',
     price: 3.50,
     priceUnit: '% interest',
     rating: 4.3,
@@ -230,7 +229,7 @@ export const loanProviders: Provider[] = [
     id: '39',
     name: 'BN Bank',
     category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=BNBank',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/BN_Bank_logo.svg',
     price: 3.20,
     priceUnit: '% interest',
     rating: 4.4,
@@ -251,35 +250,6 @@ export const loanProviders: Provider[] = [
       loans: 'https://www.bnbank.no/lan',
     },
     priceLastUpdated: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-08-08T10:50:00Z',
-  },
-  {
-    id: '40',
-    name: 'Ikano Bank',
-    category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=IkanoBank',
-    price: 3.45,
-    priceUnit: '% interest',
-    rating: 4.1,
-    description: 'Ikano Bank offers consumer loans and credit card solutions with competitive rates and good service.',
-    features: {
-      mortgage: false,
-      personal: true,
-      carLoan: true,
-      studentLoan: false,
-      fixedRate: false,
-      flexibleTerms: true,
-    },
-    url: 'https://www.ikanobank.no',
-    categoryUrls: {
-      insurance: 'https://www.ikanobank.no',
-      electricity: 'https://www.ikanobank.no',
-      mobile: 'https://www.ikanobank.no',
-      loans: 'https://www.ikanobank.no/lan',
-    },
-    priceLastUpdated: new Date(Date.now() - 80 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-08-10T13:25:00Z',
-  },
-];
+    isLivePrice:
+::contentReference[oaicite:4]{index=4}
+ 
