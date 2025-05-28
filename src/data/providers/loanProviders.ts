@@ -6,7 +6,7 @@ export const loanProviders: Provider[] = [
     id: '31',
     name: 'DNB',
     category: 'loans',
-    logo: 'https://via.placeholder.com/100x60?text=DNB',
+    logo: 'https://dnb.no/path/to/real/logo.png',
     price: 3.15,
     priceUnit: '% interest',
     rating: 4.7,
