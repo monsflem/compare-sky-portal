@@ -1,285 +1,84 @@
+import React from 'react'
+import { Provider } from '../../types'
 
-import { Provider } from '../../types';
+// Dummy logo-komponenter - bytt ut med ekte importerte SVG React-komponenter
+const DNBLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#0033A0" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="24">DNB</text></svg>
+const NordeaLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#003366" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="20">Nordea</text></svg>
+const SantanderLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#D32F2F" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="20">Santander</text></svg>
+const KomplettBankLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#008080" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="16">Komplett Bank</text></svg>
+const InstabankLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#FF6600" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="16">Instabank</text></svg>
+const BankNorwegianLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#E60000" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="18">BankNorwegian</text></svg>
+const YABankLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#0055A4" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="20">yA Bank</text></svg>
+const SveaFinansLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#00BFFF" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="18">Svea Finans</text></svg>
+const BNBankLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#004B87" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="18">BN Bank</text></svg>
+const IkanoBankLogo = () => <svg width="100" height="60"><rect width="100" height="60" fill="#FF9900" /><text x="50%" y="50%" fill="white" alignmentBaseline="middle" textAnchor="middle" fontSize="18">Ikano Bank</text></svg>
 
-export const mobileProviders: Provider[] = [
+// Mapping av navn til logo-komponenter
+const providerLogos: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  'DNB': DNBLogo,
+  'Nordea': NordeaLogo,
+  'Santander': SantanderLogo,
+  'Komplett Bank': KomplettBankLogo,
+  'Instabank': InstabankLogo,
+  'Bank Norwegian': BankNorwegianLogo,
+  'yA Bank': YABankLogo,
+  'Svea Finans': SveaFinansLogo,
+  'BN Bank': BNBankLogo,
+  'Ikano Bank': IkanoBankLogo,
+}
+
+// Din provider data (forkortet her for lesbarhet - lim inn din fulle liste)
+export const loanProviders: Provider[] = [
   {
-    id: '21',
-    name: 'Telenor',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Telenor',
-    price: 399,
-    priceUnit: 'NOK/month',
-    rating: 4.5,
-    description: 'Telenor provides reliable mobile coverage with a wide range of subscription plans to suit your needs.',
-    features: {
-      data: '20GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: true,
-      "5G": true,
-    },
-    url: 'https://www.telenor.no',
-    categoryUrls: {
-      insurance: 'https://www.telenor.no',
-      electricity: 'https://www.telenor.no',
-      mobile: 'https://www.telenor.no/mobil/abonnement',
-      loans: 'https://www.telenor.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+    id: '31',
+    name: 'DNB',
+    category: 'loans',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/53/DNB_Logo.svg',
+    price: 3.15,
+    priceUnit: '% interest',
+    rating: 4.7,
+    description: 'DNB offers competitive mortgage and personal loan options with flexible terms and fast approval.',
+    features: { mortgage: true, personal: true, carLoan: true, studentLoan: true, fixedRate: true, flexibleTerms: true },
+    url: 'https://www.dnb.no',
+    categoryUrls: { insurance: 'https://www.dnb.no/forsikring', electricity: 'https://www.dnb.no', mobile: 'https://www.dnb.no', loans: 'https://www.dnb.no/lan' },
+    priceLastUpdated: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
     isLivePrice: false,
-    updatedAt: '2023-05-14T15:30:00Z',
+    updatedAt: '2023-05-11T14:25:00Z',
   },
-  {
-    id: '22',
-    name: 'Telia',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Telia',
-    price: 379,
-    priceUnit: 'NOK/month',
-    rating: 4.6,
-    description: 'Telia offers competitive mobile plans with excellent coverage and customer service.',
-    features: {
-      data: '15GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: false,
-      "5G": true,
-    },
-    url: 'https://www.telia.no',
-    categoryUrls: {
-      insurance: 'https://www.telia.no',
-      electricity: 'https://www.telia.no',
-      mobile: 'https://www.telia.no/mobil/abonnement',
-      loans: 'https://www.telia.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 22 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-05-16T10:45:00Z',
-  },
-  {
-    id: '23',
-    name: 'Ice',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=ICE',
-    price: 299,
-    priceUnit: 'NOK/month',
-    rating: 4.2,
-    description: 'Ice provides affordable mobile subscriptions with good network coverage throughout Norway.',
-    features: {
-      data: '10GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: false,
-      familyDiscount: true,
-      "5G": false,
-    },
-    url: 'https://www.ice.no',
-    categoryUrls: {
-      insurance: 'https://www.ice.no',
-      electricity: 'https://www.ice.no',
-      mobile: 'https://www.ice.no/abonnement',
-      loans: 'https://www.ice.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-05-19T09:15:00Z',
-  },
-  {
-    id: '24',
-    name: 'OneCall',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=OneCall',
-    price: 329,
-    priceUnit: 'NOK/month',
-    rating: 4.4,
-    description: 'OneCall offers flexible and affordable mobile subscriptions with good customer service.',
-    features: {
-      data: '12GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: true,
-      "5G": true,
-    },
-    url: 'https://www.onecall.no',
-    categoryUrls: {
-      insurance: 'https://www.onecall.no',
-      electricity: 'https://www.onecall.no',
-      mobile: 'https://www.onecall.no/mobil',
-      loans: 'https://www.onecall.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
-    isLivePrice: true,
-    updatedAt: '2023-07-05T11:30:00Z',
-  },
-  {
-    id: '25',
-    name: 'Talkmore',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Talkmore',
-    price: 279,
-    priceUnit: 'NOK/month',
-    rating: 4.3,
-    description: 'Talkmore offers budget-friendly mobile subscriptions with simple pricing and good service quality.',
-    features: {
-      data: '8GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: false,
-      "5G": false,
-    },
-    url: 'https://www.talkmore.no',
-    categoryUrls: {
-      insurance: 'https://www.talkmore.no',
-      electricity: 'https://www.talkmore.no',
-      mobile: 'https://www.talkmore.no/abonnement',
-      loans: 'https://www.talkmore.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-08T14:20:00Z',
-  },
-  {
-    id: '26',
-    name: 'Chili Mobil',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=ChiliMobil',
-    price: 249,
-    priceUnit: 'NOK/month',
-    rating: 4.0,
-    description: 'Chili Mobil offers affordable mobile plans with flexible data options and no binding period.',
-    features: {
-      data: '6GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: false,
-      familyDiscount: false,
-      "5G": false,
-    },
-    url: 'https://www.chilimobil.no',
-    categoryUrls: {
-      insurance: 'https://www.chilimobil.no',
-      electricity: 'https://www.chilimobil.no',
-      mobile: 'https://www.chilimobil.no/abonnement',
-      loans: 'https://www.chilimobil.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 75 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-10T09:45:00Z',
-  },
-  {
-    id: '27',
-    name: 'Happybytes',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Happybytes',
-    price: 239,
-    priceUnit: 'NOK/month',
-    rating: 4.1,
-    description: 'Happybytes offers customizable mobile plans where you only pay for what you need with no hidden fees.',
-    features: {
-      data: '5GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: false,
-      "5G": false,
-    },
-    url: 'https://www.happybytes.no',
-    categoryUrls: {
-      insurance: 'https://www.happybytes.no',
-      electricity: 'https://www.happybytes.no',
-      mobile: 'https://www.happybytes.no/mobil',
-      loans: 'https://www.happybytes.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-12T15:50:00Z',
-  },
-  {
-    id: '28',
-    name: 'MyCall',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=MyCall',
-    price: 229,
-    priceUnit: 'NOK/month',
-    rating: 3.9,
-    description: 'MyCall offers affordable mobile plans with good international calling rates and flexible options.',
-    features: {
-      data: '4GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: false,
-      familyDiscount: false,
-      "5G": false,
-    },
-    url: 'https://www.mycall.no',
-    categoryUrls: {
-      insurance: 'https://www.mycall.no',
-      electricity: 'https://www.mycall.no',
-      mobile: 'https://www.mycall.no/mobil',
-      loans: 'https://www.mycall.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 120 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-15T10:30:00Z',
-  },
-  {
-    id: '29',
-    name: 'Release',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Release',
-    price: 319,
-    priceUnit: 'NOK/month',
-    rating: 4.2,
-    description: 'Release offers digital-first mobile plans with simplicity in mind and good customer service.',
-    features: {
-      data: '10GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: true,
-      familyDiscount: false,
-      "5G": true,
-    },
-    url: 'https://www.release.no',
-    categoryUrls: {
-      insurance: 'https://www.release.no',
-      electricity: 'https://www.release.no',
-      mobile: 'https://www.release.no/mobilabonnement',
-      loans: 'https://www.release.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 18 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-18T12:40:00Z',
-  },
-  {
-    id: '30',
-    name: 'Nortel',
-    category: 'mobile',
-    logo: 'https://via.placeholder.com/100x60?text=Nortel',
-    price: 269,
-    priceUnit: 'NOK/month',
-    rating: 4.0,
-    description: 'Nortel provides budget-friendly mobile subscriptions with focus on reliability and customer satisfaction.',
-    features: {
-      data: '7GB',
-      unlimitedCalls: true,
-      unlimitedTexts: true,
-      freeRoaming: false,
-      familyDiscount: true,
-      "5G": false,
-    },
-    url: 'https://www.nortel.no',
-    categoryUrls: {
-      insurance: 'https://www.nortel.no',
-      electricity: 'https://www.nortel.no',
-      mobile: 'https://www.nortel.no/mobil',
-      loans: 'https://www.nortel.no',
-    },
-    priceLastUpdated: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
-    isLivePrice: false,
-    updatedAt: '2023-07-20T14:15:00Z',
-  },
-];
+  // ... lim inn resten av leverandørene her ...
+]
+
+type LoanProvidersListProps = { providers: Provider[] }
+
+export const LoanProvidersList: React.FC<LoanProvidersListProps> = ({ providers }) => {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+      {providers.map((provider) => {
+        const LogoComponent = providerLogos[provider.name]
+        return (
+          <div
+            key={provider.id}
+            style={{
+              border: '1px solid #ccc',
+              padding: '1rem',
+              width: 220,
+              textAlign: 'center',
+              borderRadius: '8px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+            }}
+          >
+            <div style={{ fontSize: '6rem', color: 'currentColor', marginBottom: '1rem' }}>
+              {LogoComponent ? <LogoComponent /> : <img src={provider.logo} alt={`${provider.name} logo`} style={{ maxWidth: '100%', maxHeight: 60, objectFit: 'contain' }} />}
+            </div>
+            <h3 style={{ marginBottom: '0.5rem' }}>{provider.name}</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', minHeight: 50 }}>{provider.description}</p>
+            <p style={{ fontWeight: 'bold', marginTop: '1rem' }}>{provider.price} {provider.priceUnit}</p>
+            <a href={provider.url} target="_blank" rel="noopener noreferrer" style={{ color: '#0070f3', textDecoration: 'none' }}>
+              Besøk nettside
+            </a>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
