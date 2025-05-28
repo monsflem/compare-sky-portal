@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@eufemia/assets": path.resolve(__dirname, "./src/assets"), // Legg til denne linjen med korrekt sti til assets
     },
   },
 }));
