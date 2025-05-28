@@ -1,5 +1,19 @@
 
-export interface Provider {
+// Re-export Supabase types for backward compatibility
+export type {
+  Category,
+  Provider,
+  Offer,
+  UserProfile,
+  UserFavorite,
+  ComparisonSession,
+  AdminLog,
+  ErrorLog,
+  PriceHistory
+} from './supabase';
+
+// Legacy types for backward compatibility
+export interface LegacyProvider {
   id: string;
   name: string;
   category: 'insurance' | 'electricity' | 'mobile' | 'loans';
@@ -21,16 +35,6 @@ export interface Provider {
   updatedAt: string;
 }
 
-export interface ErrorLog {
-  id: string;
-  message: string;
-  source: string;
-  stackTrace: string;
-  isResolved: boolean;
-  createdAt: string;
-  resolvedAt: string | null;
-}
-
 export interface AffiliateClick {
   id: string;
   providerId: string;
@@ -40,4 +44,4 @@ export interface AffiliateClick {
   referrer: string;
 }
 
-export type Category = 'insurance' | 'electricity' | 'mobile' | 'loans';
+export type CategorySlug = 'insurance' | 'electricity' | 'mobile' | 'loans';

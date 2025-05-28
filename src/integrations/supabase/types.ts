@@ -9,32 +9,124 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      categories: {
+      admin_logs: {
         Row: {
-          category_id: string
-          created_at: string
-          icon: string | null
-          name: string
-          slug: string
-          updated_at: string
+          action: string
+          admin_id: string | null
+          created_at: string | null
+          id: string
+          new_values: Json | null
+          old_values: Json | null
+          record_id: string | null
+          table_name: string | null
         }
         Insert: {
-          category_id?: string
-          created_at?: string
-          icon?: string | null
-          name: string
-          slug: string
-          updated_at?: string
+          action: string
+          admin_id?: string | null
+          created_at?: string | null
+          id?: string
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          table_name?: string | null
         }
         Update: {
-          category_id?: string
-          created_at?: string
+          action?: string
+          admin_id?: string | null
+          created_at?: string | null
+          id?: string
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          table_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_logs_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string | null
+          description_en: string | null
+          description_no: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          name_en: string
+          name_no: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description_en?: string | null
+          description_no?: string | null
           icon?: string | null
-          name?: string
+          id?: string
+          is_active?: boolean | null
+          name_en: string
+          name_no: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description_en?: string | null
+          description_no?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          name_en?: string
+          name_no?: string
           slug?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: []
+      }
+      comparison_sessions: {
+        Row: {
+          category_id: string | null
+          created_at: string | null
+          id: string
+          session_data: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string | null
+          id?: string
+          session_data?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string | null
+          id?: string
+          session_data?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comparison_sessions_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comparison_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       error_logs: {
         Row: {
@@ -63,6 +155,103 @@ export type Database = {
         }
         Relationships: []
       }
+      offers: {
+        Row: {
+          created_at: string | null
+          description_en: string | null
+          description_no: string | null
+          external_url: string | null
+          features: Json | null
+          id: string
+          is_active: boolean | null
+          is_featured: boolean | null
+          price: number | null
+          price_unit: string | null
+          provider_id: string | null
+          title_en: string
+          title_no: string
+          updated_at: string | null
+          valid_from: string | null
+          valid_until: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description_en?: string | null
+          description_no?: string | null
+          external_url?: string | null
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          price?: number | null
+          price_unit?: string | null
+          provider_id?: string | null
+          title_en: string
+          title_no: string
+          updated_at?: string | null
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description_en?: string | null
+          description_no?: string | null
+          external_url?: string | null
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          price?: number | null
+          price_unit?: string | null
+          provider_id?: string | null
+          title_en?: string
+          title_no?: string
+          updated_at?: string | null
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "offers_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "providers"
+            referencedColumns: ["provider_id"]
+          },
+        ]
+      }
+      price_history: {
+        Row: {
+          id: string
+          offer_id: string | null
+          price: number
+          price_unit: string | null
+          recorded_at: string | null
+        }
+        Insert: {
+          id?: string
+          offer_id?: string | null
+          price: number
+          price_unit?: string | null
+          recorded_at?: string | null
+        }
+        Update: {
+          id?: string
+          offer_id?: string | null
+          price?: number
+          price_unit?: string | null
+          recorded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "price_history_offer_id_fkey"
+            columns: ["offer_id"]
+            isOneToOne: false
+            referencedRelation: "offers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       provider_categories: {
         Row: {
           category_id: string
@@ -83,13 +272,6 @@ export type Database = {
           provider_id?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "provider_categories_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["category_id"]
-          },
           {
             foreignKeyName: "provider_categories_provider_id_fkey"
             columns: ["provider_id"]
@@ -161,38 +343,70 @@ export type Database = {
       providers: {
         Row: {
           affiliate_url: string | null
+          category_id: string | null
+          contact_email: string | null
+          contact_phone: string | null
           created_at: string
           description: string | null
+          description_en: string | null
+          description_no: string | null
+          is_active: boolean | null
           last_updated: string
           logo_url: string | null
           name: string
           provider_id: string
           rating: number | null
+          review_count: number | null
+          slug: string | null
           website_url: string
         }
         Insert: {
           affiliate_url?: string | null
+          category_id?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
           created_at?: string
           description?: string | null
+          description_en?: string | null
+          description_no?: string | null
+          is_active?: boolean | null
           last_updated?: string
           logo_url?: string | null
           name: string
           provider_id?: string
           rating?: number | null
+          review_count?: number | null
+          slug?: string | null
           website_url: string
         }
         Update: {
           affiliate_url?: string | null
+          category_id?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
           created_at?: string
           description?: string | null
+          description_en?: string | null
+          description_no?: string | null
+          is_active?: boolean | null
           last_updated?: string
           logo_url?: string | null
           name?: string
           provider_id?: string
           rating?: number | null
+          review_count?: number | null
+          slug?: string | null
           website_url?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "providers_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ta: {
         Row: {
@@ -254,7 +468,12 @@ export type Database = {
           created_at: string
           email: string | null
           favorites: Json | null
+          first_name: string | null
           full_name: string | null
+          is_admin: boolean | null
+          last_name: string | null
+          phone: string | null
+          preferred_language: string | null
           settings: Json | null
           updated_at: string
           user_id: string
@@ -264,7 +483,12 @@ export type Database = {
           created_at?: string
           email?: string | null
           favorites?: Json | null
+          first_name?: string | null
           full_name?: string | null
+          is_admin?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          preferred_language?: string | null
           settings?: Json | null
           updated_at?: string
           user_id: string
@@ -274,7 +498,12 @@ export type Database = {
           created_at?: string
           email?: string | null
           favorites?: Json | null
+          first_name?: string | null
           full_name?: string | null
+          is_admin?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          preferred_language?: string | null
           settings?: Json | null
           updated_at?: string
           user_id?: string

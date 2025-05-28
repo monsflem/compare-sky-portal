@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import ErrorLogTable from '../components/ErrorLogTable';
-import { mockErrorLogs } from '../data/mockErrorLogs';
+import { useResolveAllErrors } from '@/hooks/useSupabaseData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,13 +14,11 @@ const AdminDashboard = () => {
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('errors');
   
-  const [errorLogs, setErrorLogs] = useState(mockErrorLogs);
-  const [isLoading, setIsLoading] = useState(false);
+  const resolveAllErrorsMutation = useResolveAllErrors();
 
   // Mock login function
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     
     // Simulate API call
     setTimeout(() => {
@@ -31,20 +28,18 @@ const AdminDashboard = () => {
       } else {
         toast.error('Invalid credentials. Try admin/admin');
       }
-      setIsLoading(false);
     }, 1000);
   };
 
-  // Mock resolve error function
   const handleResolveAllErrors = () => {
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setErrorLogs(errorLogs.map(log => ({ ...log, isResolved: true, resolvedAt: new Date().toISOString() })));
-      toast.success('All errors have been marked as resolved');
-      setIsLoading(false);
-    }, 1000);
+    resolveAllErrorsMutation.mutate(undefined, {
+      onSuccess: () => {
+        toast.success('All errors have been marked as resolved');
+      },
+      onError: (error) => {
+        toast.error('Failed to resolve errors: ' + error.message);
+      }
+    });
   };
 
   if (!isAuthenticated) {
@@ -93,9 +88,8 @@ const AdminDashboard = () => {
                     <Button 
                       type="submit" 
                       className="w-full bg-sky-600 hover:bg-sky-700"
-                      disabled={isLoading}
                     >
-                      {isLoading ? 'Logging in...' : 'Login'}
+                      Login
                     </Button>
                   </div>
                   <div className="text-center text-sm text-slate-500">
@@ -138,15 +132,13 @@ const AdminDashboard = () => {
                 <Button
                   className="mt-4 sm:mt-0 bg-sky-600 hover:bg-sky-700"
                   onClick={handleResolveAllErrors}
-                  disabled={isLoading}
+                  disabled={resolveAllErrorsMutation.isPending}
                 >
-                  {isLoading ? 'Processing...' : 'Mark All as Resolved'}
+                  {resolveAllErrorsMutation.isPending ? 'Processing...' : 'Mark All as Resolved'}
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
-                  <ErrorLogTable errorLogs={errorLogs} />
-                </div>
+                <ErrorLogTable />
               </CardContent>
             </Card>
           </TabsContent>
@@ -161,7 +153,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-center p-8 text-slate-500">
-                  <p>Affiliate click tracking will be implemented with Supabase integration</p>
+                  <p>Affiliate click tracking will be implemented with additional Supabase tables</p>
                 </div>
               </CardContent>
             </Card>
