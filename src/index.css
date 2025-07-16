@@ -1,9 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
   :root {
@@ -16,24 +16,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 213 94% 68%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 214 100% 50%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 213 94% 68%;
+    --ring: 214 100% 50%;
 
     --radius: 0.5rem;
 
@@ -44,146 +44,405 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 213 94% 68%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Category colors for light mode */
+    --category-yellow: 45 93% 47%;
+    --category-yellow-dark: 45 93% 52%;
+    --category-yellow-bg: 45 86% 95%;
+    --category-yellow-bg-dark: 45 86% 92%;
+    --category-yellow-border: 45 69% 84%;
+    --category-yellow-border-dark: 45 69% 79%;
+
+    --category-blue: 214 100% 50%;
+    --category-blue-dark: 214 100% 55%;
+    --category-blue-bg: 214 100% 95%;
+    --category-blue-bg-dark: 214 100% 92%;
+    --category-blue-border: 214 100% 84%;
+    --category-blue-border-dark: 214 100% 79%;
+
+    --category-green: 142 71% 45%;
+    --category-green-dark: 142 71% 50%;
+    --category-green-bg: 142 76% 95%;
+    --category-green-bg-dark: 142 76% 92%;
+    --category-green-border: 142 69% 84%;
+    --category-green-border-dark: 142 69% 79%;
+
+    --category-purple: 262 83% 58%;
+    --category-purple-dark: 262 83% 63%;
+    --category-purple-bg: 262 86% 95%;
+    --category-purple-bg-dark: 262 86% 92%;
+    --category-purple-border: 262 69% 84%;
+    --category-purple-border-dark: 262 69% 79%;
+
+    --category-indigo: 239 84% 67%;
+    --category-indigo-dark: 239 84% 72%;
+    --category-indigo-bg: 239 86% 95%;
+    --category-indigo-bg-dark: 239 86% 92%;
+    --category-indigo-border: 239 69% 84%;
+    --category-indigo-border-dark: 239 69% 79%;
+
+    --category-red: 0 84% 60%;
+    --category-red-dark: 0 84% 65%;
+    --category-red-bg: 0 86% 95%;
+    --category-red-bg-dark: 0 86% 92%;
+    --category-red-border: 0 69% 84%;
+    --category-red-border-dark: 0 69% 79%;
+
+    --category-orange: 24 95% 53%;
+    --category-orange-dark: 24 95% 58%;
+    --category-orange-bg: 24 86% 95%;
+    --category-orange-bg-dark: 24 86% 92%;
+    --category-orange-border: 24 69% 84%;
+    --category-orange-border-dark: 24 69% 79%;
+
+    --category-amber: 43 96% 56%;
+    --category-amber-dark: 43 96% 61%;
+    --category-amber-bg: 43 86% 95%;
+    --category-amber-bg-dark: 43 86% 92%;
+    --category-amber-border: 43 69% 84%;
+    --category-amber-border-dark: 43 69% 79%;
+
+    --category-cyan: 184 91% 52%;
+    --category-cyan-dark: 184 91% 57%;
+    --category-cyan-bg: 184 86% 95%;
+    --category-cyan-bg-dark: 184 86% 92%;
+    --category-cyan-border: 184 69% 84%;
+    --category-cyan-border-dark: 184 69% 79%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 13% 12%;
+    --foreground: 210 40% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 13% 16%;
+    --card-foreground: 210 40% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 13% 16%;
+    --popover-foreground: 210 40% 95%;
 
-    --primary: 213 94% 68%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 214 85% 65%;
+    --primary-foreground: 220 13% 12%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 210 40% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 13% 18%;
+    --muted-foreground: 215 20.2% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 220 13% 20%;
+    --accent-foreground: 210 40% 95%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 213 94% 68%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 213 94% 68%;
+    --border: 220 13% 24%;
+    --input: 220 13% 24%;
+    --ring: 214 85% 65%;
+    
+    --sidebar-background: 220 13% 16%;
+    --sidebar-foreground: 215 20.2% 65.1%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 220 13% 16%;
+    --sidebar-accent: 220 13% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 13% 22%;
+    --sidebar-ring: 214 85% 65%;
+
+    /* Category colors for dark mode */
+    --category-yellow: 45 93% 65%;
+    --category-yellow-dark: 45 93% 70%;
+    --category-yellow-bg: 45 20% 20%;
+    --category-yellow-bg-dark: 45 25% 15%;
+    --category-yellow-border: 45 30% 30%;
+    --category-yellow-border-dark: 45 35% 25%;
+
+    --category-blue: 214 85% 65%;
+    --category-blue-dark: 214 90% 70%;
+    --category-blue-bg: 214 20% 20%;
+    --category-blue-bg-dark: 214 25% 15%;
+    --category-blue-border: 214 30% 30%;
+    --category-blue-border-dark: 214 35% 25%;
+
+    --category-green: 142 71% 65%;
+    --category-green-dark: 142 76% 70%;
+    --category-green-bg: 142 20% 20%;
+    --category-green-bg-dark: 142 25% 15%;
+    --category-green-border: 142 30% 30%;
+    --category-green-border-dark: 142 35% 25%;
+
+    --category-purple: 262 83% 70%;
+    --category-purple-dark: 262 88% 75%;
+    --category-purple-bg: 262 20% 20%;
+    --category-purple-bg-dark: 262 25% 15%;
+    --category-purple-border: 262 30% 30%;
+    --category-purple-border-dark: 262 35% 25%;
+
+    --category-indigo: 239 84% 70%;
+    --category-indigo-dark: 239 89% 75%;
+    --category-indigo-bg: 239 20% 20%;
+    --category-indigo-bg-dark: 239 25% 15%;
+    --category-indigo-border: 239 30% 30%;
+    --category-indigo-border-dark: 239 35% 25%;
+
+    --category-red: 0 84% 70%;
+    --category-red-dark: 0 89% 75%;
+    --category-red-bg: 0 20% 20%;
+    --category-red-bg-dark: 0 25% 15%;
+    --category-red-border: 0 30% 30%;
+    --category-red-border-dark: 0 35% 25%;
+
+    --category-orange: 24 95% 70%;
+    --category-orange-dark: 24 100% 75%;
+    --category-orange-bg: 24 20% 20%;
+    --category-orange-bg-dark: 24 25% 15%;
+    --category-orange-border: 24 30% 30%;
+    --category-orange-border-dark: 24 35% 25%;
+
+    --category-amber: 43 96% 70%;
+    --category-amber-dark: 43 100% 75%;
+    --category-amber-bg: 43 20% 20%;
+    --category-amber-bg-dark: 43 25% 15%;
+    --category-amber-border: 43 30% 30%;
+    --category-amber-border-dark: 43 35% 25%;
+
+    --category-cyan: 184 91% 70%;
+    --category-cyan-dark: 184 96% 75%;
+    --category-cyan-bg: 184 20% 20%;
+    --category-cyan-bg-dark: 184 25% 15%;
+    --category-cyan-border: 184 30% 30%;
+    --category-cyan-border-dark: 184 35% 25%;
+  }
+
+  /* Smooth theme transitions */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gradient-to-br from-blue-50 via-white to-indigo-50 text-slate-900 font-sans min-h-screen;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-montserrat font-semibold;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
   }
 }
 
 @layer components {
-  .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  .gradient-bg {
+    background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #059669 100%);
   }
   
-  .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  .category-card {
+    @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-gray-100 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500;
   }
   
-  .btn-secondary {
-    @apply bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50 text-slate-800 py-2 px-4 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md;
+  .nav-dropdown {
+    @apply absolute top-full left-0 mt-2 w-48 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50 opacity-0 invisible transition-all duration-200;
   }
   
-  .hero-section {
-    @apply bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-16 relative overflow-hidden;
+  .nav-dropdown.active {
+    @apply opacity-100 visible;
+  }
+
+  .carousel-container {
+    will-change: transform;
+  }
+
+  @keyframes scroll-provider {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  .animate-scroll-provider {
+    animation: scroll-provider 180s linear infinite;
+  }
+
+  .hero-to-content-transition {
+    background: linear-gradient(to bottom, 
+      rgba(0, 0, 0, 0.4) 0%, 
+      rgba(0, 0, 0, 0.3) 20%, 
+      rgba(0, 0, 0, 0.1) 40%, 
+      rgba(255, 255, 255, 0) 60%, 
+      rgba(255, 255, 255, 0.5) 80%, 
+      rgba(255, 255, 255, 0.9) 100%
+    );
+  }
+
+  .plane-hover {
+    transition: all 0.3s ease;
+  }
+
+  .plane-hover:hover {
+    transform: translateY(-2px) scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(30, 64, 175, 0.3));
+  }
+
+  .plane-hover:hover svg {
+    animation: fly 0.6s ease-in-out;
+  }
+
+  @keyframes fly {
+    0% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(2px) rotate(2deg); }
+    50% { transform: translateX(-2px) rotate(-2deg); }
+    75% { transform: translateX(1px) rotate(1deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+  }
+
+  /* Enhanced logo display styles */
+  .provider-logo {
+    filter: brightness(1.1) contrast(1.1);
+    mix-blend-mode: multiply;
+    background: transparent;
+  }
+
+  .provider-logo:hover {
+    filter: brightness(1.2) contrast(1.2) saturate(1.1);
   }
   
-  .hero-section::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-blue-600/20 to-indigo-600/20;
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
   }
-  
-  .section {
-    @apply py-12 md:py-16;
-  }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl;
-  }
-
-  .glass-card {
-    @apply bg-white/60 backdrop-blur-md border border-white/30 rounded-xl shadow-lg;
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent;
-  }
-
-  .live-indicator {
-    @apply relative;
-  }
-
-  .live-indicator::before {
-    content: '';
-    @apply absolute -left-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-green-500 rounded-full animate-pulse;
-  }
-
-  .shimmer {
-    @apply relative overflow-hidden;
-  }
-
-  .shimmer::after {
-    content: '';
-    @apply absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-12 animate-[shimmer_2s_infinite];
-  }
-
-  @keyframes shimmer {
-    0% { transform: translateX(-100%) skewX(-12deg); }
-    100% { transform: translateX(200%) skewX(-12deg); }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
   }
 }
 
-/* Enhanced responsive design */
-@media (max-width: 640px) {
-  .hero-section {
-    @apply py-12;
-  }
-  
-  .container-custom {
-    @apply px-3;
+/* Progressive navbar hiding for better responsiveness */
+@media (max-width: 1200px) {
+  .service-text-progressive {
+    display: none;
   }
 }
 
-/* Dark mode enhancements */
-@media (prefers-color-scheme: dark) {
-  body {
-    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900;
+/* SVG color scheme for flags - Force light colors */
+svg[style*="colorScheme"],
+[style*="colorScheme"] svg,
+.flag-container svg {
+  color-scheme: light !important;
+  filter: none !important;
+}
+
+/* Ensure flag colors are preserved in all themes */
+.flag-container {
+  color-scheme: light !important;
+}
+
+/* Progressive navbar text hiding */
+@media (max-width: 1536px) {
+  .service-text-full {
+    display: none;
   }
 }
 
-/* Print styles */
-@media print {
-  .hero-section,
-  .card-hover {
-    @apply shadow-none bg-white;
+@media (max-width: 1280px) {
+  .service-text-compact {
+    display: none;
+  }
+}
+
+/* Tooltips for icon-only mode */
+.tooltip-hover {
+  position: relative;
+}
+
+.tooltip-hover:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Improved slider styling */
+.slider-track {
+  background: linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) var(--range-progress, 0%), hsl(var(--muted)) var(--range-progress, 0%), hsl(var(--muted)) 100%);
+}
+
+/* Touch targets for mobile */
+@media (max-width: 768px) {
+  [role="slider"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Mobile animation keyframes */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.mobile-animation {
+  position: relative;
+  width: 200px;
+  height: auto;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Larger size on XL screens */
+@media (min-width: 1280px) {
+  .mobile-animation {
+    width: 280px;
+    max-width: 280px;
+  }
+}
+
+/* Hide on smaller screens to prevent overlap with text content */
+@media (max-width: 1200px) {
+  .mobile-animation {
+    display: none;
+  }
+}
+
+.mobile-slide-in {
+  animation: slideInLeft 1s forwards;
+}
+
+.mobile-slide-out {
+  animation: slideOutLeft 1s forwards;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

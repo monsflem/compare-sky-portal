@@ -7,542 +7,566 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instanciate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "12.2.3 (519615d)"
+  }
   public: {
     Tables: {
-      admin_logs: {
-        Row: {
-          action: string
-          admin_id: string | null
-          created_at: string | null
-          id: string
-          new_values: Json | null
-          old_values: Json | null
-          record_id: string | null
-          table_name: string | null
-        }
-        Insert: {
-          action: string
-          admin_id?: string | null
-          created_at?: string | null
-          id?: string
-          new_values?: Json | null
-          old_values?: Json | null
-          record_id?: string | null
-          table_name?: string | null
-        }
-        Update: {
-          action?: string
-          admin_id?: string | null
-          created_at?: string | null
-          id?: string
-          new_values?: Json | null
-          old_values?: Json | null
-          record_id?: string | null
-          table_name?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "admin_logs_admin_id_fkey"
-            columns: ["admin_id"]
-            isOneToOne: false
-            referencedRelation: "user_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      categories: {
+      admin_users: {
         Row: {
           created_at: string | null
-          description_en: string | null
-          description_no: string | null
-          icon: string | null
+          email: string
           id: string
-          is_active: boolean | null
-          name_en: string
-          name_no: string
-          slug: string
+          name: string | null
+          password_hash: string
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          icon?: string | null
+          email: string
           id?: string
-          is_active?: boolean | null
-          name_en: string
-          name_no: string
-          slug: string
+          name?: string | null
+          password_hash: string
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          icon?: string | null
+          email?: string
           id?: string
-          is_active?: boolean | null
-          name_en?: string
-          name_no?: string
-          slug?: string
+          name?: string | null
+          password_hash?: string
           updated_at?: string | null
         }
         Relationships: []
       }
-      comparison_sessions: {
+      bank_plans: {
         Row: {
-          category_id: string | null
-          created_at: string | null
-          id: string
-          session_data: Json | null
-          user_id: string | null
+          effective_rate: string | null
+          id: number
+          loan_type: string | null
+          logo_url: string | null
+          monthly_payment: string | null
+          provider: string | null
+          url: string | null
         }
         Insert: {
-          category_id?: string | null
-          created_at?: string | null
-          id?: string
-          session_data?: Json | null
-          user_id?: string | null
+          effective_rate?: string | null
+          id?: number
+          loan_type?: string | null
+          logo_url?: string | null
+          monthly_payment?: string | null
+          provider?: string | null
+          url?: string | null
         }
         Update: {
-          category_id?: string | null
-          created_at?: string | null
-          id?: string
-          session_data?: Json | null
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "comparison_sessions_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "comparison_sessions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      error_logs: {
-        Row: {
-          component: string
-          error_message: string
-          log_id: string
-          occurred_at: string
-          resolved: boolean | null
-          retry_count: number | null
-        }
-        Insert: {
-          component: string
-          error_message: string
-          log_id?: string
-          occurred_at?: string
-          resolved?: boolean | null
-          retry_count?: number | null
-        }
-        Update: {
-          component?: string
-          error_message?: string
-          log_id?: string
-          occurred_at?: string
-          resolved?: boolean | null
-          retry_count?: number | null
+          effective_rate?: string | null
+          id?: number
+          loan_type?: string | null
+          logo_url?: string | null
+          monthly_payment?: string | null
+          provider?: string | null
+          url?: string | null
         }
         Relationships: []
       }
-      offers: {
+      cleaning_services: {
         Row: {
           created_at: string | null
-          description_en: string | null
-          description_no: string | null
-          external_url: string | null
-          features: Json | null
+          equipment_included: boolean | null
+          frequency_options: string[] | null
+          hourly_rate: number
           id: string
-          is_active: boolean | null
-          is_featured: boolean | null
-          price: number | null
-          price_unit: string | null
-          provider_id: string | null
-          title_en: string
-          title_no: string
+          location: string | null
+          logo_url: string | null
+          provider: string
+          rating: number | null
+          service_areas: string[] | null
+          service_name: string
+          service_type: string
           updated_at: string | null
-          valid_from: string | null
-          valid_until: string | null
+          url: string | null
         }
         Insert: {
           created_at?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          external_url?: string | null
-          features?: Json | null
+          equipment_included?: boolean | null
+          frequency_options?: string[] | null
+          hourly_rate: number
           id?: string
-          is_active?: boolean | null
-          is_featured?: boolean | null
-          price?: number | null
-          price_unit?: string | null
-          provider_id?: string | null
-          title_en: string
-          title_no: string
+          location?: string | null
+          logo_url?: string | null
+          provider: string
+          rating?: number | null
+          service_areas?: string[] | null
+          service_name: string
+          service_type: string
           updated_at?: string | null
-          valid_from?: string | null
-          valid_until?: string | null
+          url?: string | null
         }
         Update: {
           created_at?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          external_url?: string | null
-          features?: Json | null
+          equipment_included?: boolean | null
+          frequency_options?: string[] | null
+          hourly_rate?: number
           id?: string
-          is_active?: boolean | null
-          is_featured?: boolean | null
-          price?: number | null
-          price_unit?: string | null
-          provider_id?: string | null
-          title_en?: string
-          title_no?: string
+          location?: string | null
+          logo_url?: string | null
+          provider?: string
+          rating?: number | null
+          service_areas?: string[] | null
+          service_name?: string
+          service_type?: string
           updated_at?: string | null
-          valid_from?: string | null
-          valid_until?: string | null
+          url?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "offers_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
-            referencedRelation: "providers"
-            referencedColumns: ["provider_id"]
-          },
-        ]
+        Relationships: []
       }
-      price_history: {
+      handymen_services: {
         Row: {
+          certification: boolean | null
+          created_at: string | null
+          hourly_rate: number
           id: string
-          offer_id: string | null
-          price: number
-          price_unit: string | null
-          recorded_at: string | null
+          location: string | null
+          logo_url: string | null
+          provider: string
+          rating: number | null
+          service_name: string
+          service_type: string
+          specialties: string[] | null
+          updated_at: string | null
+          url: string | null
         }
         Insert: {
+          certification?: boolean | null
+          created_at?: string | null
+          hourly_rate: number
           id?: string
-          offer_id?: string | null
-          price: number
-          price_unit?: string | null
-          recorded_at?: string | null
+          location?: string | null
+          logo_url?: string | null
+          provider: string
+          rating?: number | null
+          service_name: string
+          service_type: string
+          specialties?: string[] | null
+          updated_at?: string | null
+          url?: string | null
         }
         Update: {
+          certification?: boolean | null
+          created_at?: string | null
+          hourly_rate?: number
           id?: string
-          offer_id?: string | null
-          price?: number
-          price_unit?: string | null
-          recorded_at?: string | null
+          location?: string | null
+          logo_url?: string | null
+          provider?: string
+          rating?: number | null
+          service_name?: string
+          service_type?: string
+          specialties?: string[] | null
+          updated_at?: string | null
+          url?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "price_history_offer_id_fkey"
-            columns: ["offer_id"]
-            isOneToOne: false
-            referencedRelation: "offers"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
-      provider_categories: {
+      home_security_plans: {
         Row: {
-          category_id: string
-          created_at: string
+          alarm_types: string[] | null
+          app_control: boolean | null
+          contract_months: number | null
+          created_at: string | null
+          equipment_included: string[] | null
           id: string
-          provider_id: string
+          installation_included: boolean | null
+          installation_type: string | null
+          logo_url: string | null
+          monitoring_24_7: boolean | null
+          monthly_price: number
+          plan_type: string
+          product_name: string
+          provider: string
+          response_service: string | null
+          response_time_minutes: number | null
+          setup_fee: number | null
+          smart_features: string[] | null
+          updated_at: string | null
+          url: string | null
         }
         Insert: {
-          category_id: string
-          created_at?: string
+          alarm_types?: string[] | null
+          app_control?: boolean | null
+          contract_months?: number | null
+          created_at?: string | null
+          equipment_included?: string[] | null
           id?: string
-          provider_id: string
+          installation_included?: boolean | null
+          installation_type?: string | null
+          logo_url?: string | null
+          monitoring_24_7?: boolean | null
+          monthly_price: number
+          plan_type: string
+          product_name: string
+          provider: string
+          response_service?: string | null
+          response_time_minutes?: number | null
+          setup_fee?: number | null
+          smart_features?: string[] | null
+          updated_at?: string | null
+          url?: string | null
         }
         Update: {
-          category_id?: string
-          created_at?: string
+          alarm_types?: string[] | null
+          app_control?: boolean | null
+          contract_months?: number | null
+          created_at?: string | null
+          equipment_included?: string[] | null
           id?: string
-          provider_id?: string
+          installation_included?: boolean | null
+          installation_type?: string | null
+          logo_url?: string | null
+          monitoring_24_7?: boolean | null
+          monthly_price?: number
+          plan_type?: string
+          product_name?: string
+          provider?: string
+          response_service?: string | null
+          response_time_minutes?: number | null
+          setup_fee?: number | null
+          smart_features?: string[] | null
+          updated_at?: string | null
+          url?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "provider_categories_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
-            referencedRelation: "providers"
-            referencedColumns: ["provider_id"]
-          },
-        ]
+        Relationships: []
       }
-      provider_offers: {
+      insurance_plans: {
         Row: {
-          created_at: string
-          description: string | null
-          external_url: string | null
-          features: Json | null
-          is_active: boolean | null
-          is_featured: boolean | null
-          offer_id: string
-          offer_name: string
-          original_price: number | null
+          age_limit: number | null
+          coverage_amount: number | null
+          created_at: string | null
+          deductible: number | null
+          features: string[] | null
+          id: string
+          insurance_type: string
+          logo_url: string | null
+          monthly_premium: number
+          product_name: string
+          provider: string
+          updated_at: string | null
+          url: string | null
+        }
+        Insert: {
+          age_limit?: number | null
+          coverage_amount?: number | null
+          created_at?: string | null
+          deductible?: number | null
+          features?: string[] | null
+          id?: string
+          insurance_type: string
+          logo_url?: string | null
+          monthly_premium: number
+          product_name: string
+          provider: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Update: {
+          age_limit?: number | null
+          coverage_amount?: number | null
+          created_at?: string | null
+          deductible?: number | null
+          features?: string[] | null
+          id?: string
+          insurance_type?: string
+          logo_url?: string | null
+          monthly_premium?: number
+          product_name?: string
+          provider?: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
+      internet_plans: {
+        Row: {
+          id: number
+          logo_url: string | null
+          plan: string | null
           price: number | null
-          price_unit: string | null
-          provider_id: string
-          terms: string | null
+          provider: string | null
+          speed: number | null
+          url: string | null
+        }
+        Insert: {
+          id?: number
+          logo_url?: string | null
+          plan?: string | null
+          price?: number | null
+          provider?: string | null
+          speed?: number | null
+          url?: string | null
+        }
+        Update: {
+          id?: number
+          logo_url?: string | null
+          plan?: string | null
+          price?: number | null
+          provider?: string | null
+          speed?: number | null
+          url?: string | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          brukertype: string
+          created_at: string
+          epost: string | null
+          id: string
+          leverandor: string | null
+          melding: string | null
+          navn: string
+          samtykke: boolean
+          telefon: string
+          tjeneste: string | null
           updated_at: string
         }
         Insert: {
+          brukertype: string
           created_at?: string
-          description?: string | null
-          external_url?: string | null
-          features?: Json | null
-          is_active?: boolean | null
-          is_featured?: boolean | null
-          offer_id?: string
-          offer_name: string
-          original_price?: number | null
-          price?: number | null
-          price_unit?: string | null
-          provider_id: string
-          terms?: string | null
+          epost?: string | null
+          id?: string
+          leverandor?: string | null
+          melding?: string | null
+          navn: string
+          samtykke?: boolean
+          telefon: string
+          tjeneste?: string | null
           updated_at?: string
         }
         Update: {
+          brukertype?: string
           created_at?: string
-          description?: string | null
-          external_url?: string | null
-          features?: Json | null
-          is_active?: boolean | null
-          is_featured?: boolean | null
-          offer_id?: string
-          offer_name?: string
-          original_price?: number | null
-          price?: number | null
-          price_unit?: string | null
-          provider_id?: string
-          terms?: string | null
+          epost?: string | null
+          id?: string
+          leverandor?: string | null
+          melding?: string | null
+          navn?: string
+          samtykke?: boolean
+          telefon?: string
+          tjeneste?: string | null
           updated_at?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "provider_offers_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
-            referencedRelation: "providers"
-            referencedColumns: ["provider_id"]
-          },
-        ]
+        Relationships: []
+      }
+      mobile_plans: {
+        Row: {
+          category: string
+          created_at: string | null
+          data_gb: number | null
+          data_included_mb: number
+          data_per_kroner: number | null
+          data_rollover: boolean | null
+          id: string
+          info: string | null
+          is_unlimited_sms: boolean | null
+          is_unlimited_talk: boolean | null
+          last_updated: string | null
+          logo_url: string | null
+          minutes_included: number
+          mms_included: number
+          monthly_rate: number
+          operator: string
+          price_nok: number
+          product_name: string
+          sms_included: number
+          source_id: string | null
+          speed: number | null
+          tech: string | null
+          url: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          data_gb?: number | null
+          data_included_mb: number
+          data_per_kroner?: number | null
+          data_rollover?: boolean | null
+          id?: string
+          info?: string | null
+          is_unlimited_sms?: boolean | null
+          is_unlimited_talk?: boolean | null
+          last_updated?: string | null
+          logo_url?: string | null
+          minutes_included: number
+          mms_included: number
+          monthly_rate: number
+          operator: string
+          price_nok: number
+          product_name: string
+          sms_included: number
+          source_id?: string | null
+          speed?: number | null
+          tech?: string | null
+          url?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          data_gb?: number | null
+          data_included_mb?: number
+          data_per_kroner?: number | null
+          data_rollover?: boolean | null
+          id?: string
+          info?: string | null
+          is_unlimited_sms?: boolean | null
+          is_unlimited_talk?: boolean | null
+          last_updated?: string | null
+          logo_url?: string | null
+          minutes_included?: number
+          mms_included?: number
+          monthly_rate?: number
+          operator?: string
+          price_nok?: number
+          product_name?: string
+          sms_included?: number
+          source_id?: string | null
+          speed?: number | null
+          tech?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
+      power_deals: {
+        Row: {
+          additional_fees: number | null
+          contract_length: string | null
+          grid_id: string | null
+          id: number
+          logo_url: string | null
+          municipality_name: string | null
+          municipality_number: number | null
+          price: number | null
+          price_unit: string | null
+          product_name: string | null
+          supplier_name: string | null
+          total_price: number | null
+        }
+        Insert: {
+          additional_fees?: number | null
+          contract_length?: string | null
+          grid_id?: string | null
+          id?: number
+          logo_url?: string | null
+          municipality_name?: string | null
+          municipality_number?: number | null
+          price?: number | null
+          price_unit?: string | null
+          product_name?: string | null
+          supplier_name?: string | null
+          total_price?: number | null
+        }
+        Update: {
+          additional_fees?: number | null
+          contract_length?: string | null
+          grid_id?: string | null
+          id?: number
+          logo_url?: string | null
+          municipality_name?: string | null
+          municipality_number?: number | null
+          price?: number | null
+          price_unit?: string | null
+          product_name?: string | null
+          supplier_name?: string | null
+          total_price?: number | null
+        }
+        Relationships: []
       }
       providers: {
         Row: {
-          affiliate_url: string | null
-          category_id: string | null
-          contact_email: string | null
-          contact_phone: string | null
-          created_at: string
-          description: string | null
-          description_en: string | null
-          description_no: string | null
-          is_active: boolean | null
-          last_updated: string
-          logo_url: string | null
-          name: string
-          provider_id: string
-          rating: number | null
-          review_count: number | null
-          slug: string | null
-          website_url: string
-        }
-        Insert: {
-          affiliate_url?: string | null
-          category_id?: string | null
-          contact_email?: string | null
-          contact_phone?: string | null
-          created_at?: string
-          description?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          is_active?: boolean | null
-          last_updated?: string
-          logo_url?: string | null
-          name: string
-          provider_id?: string
-          rating?: number | null
-          review_count?: number | null
-          slug?: string | null
-          website_url: string
-        }
-        Update: {
-          affiliate_url?: string | null
-          category_id?: string | null
-          contact_email?: string | null
-          contact_phone?: string | null
-          created_at?: string
-          description?: string | null
-          description_en?: string | null
-          description_no?: string | null
-          is_active?: boolean | null
-          last_updated?: string
-          logo_url?: string | null
-          name?: string
-          provider_id?: string
-          rating?: number | null
-          review_count?: number | null
-          slug?: string | null
-          website_url?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "providers_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      ta: {
-        Row: {
+          beskrivelse: string | null
           created_at: string
           id: number
+          kategori: string | null
+          log_url: string | null
+          navn: string
         }
         Insert: {
+          beskrivelse?: string | null
           created_at?: string
           id?: number
+          kategori?: string | null
+          log_url?: string | null
+          navn: string
         }
         Update: {
+          beskrivelse?: string | null
           created_at?: string
           id?: number
+          kategori?: string | null
+          log_url?: string | null
+          navn?: string
         }
         Relationships: []
       }
-      user_favorites: {
+      tv_packages: {
         Row: {
-          created_at: string
-          id: string
-          offer_id: string | null
-          provider_id: string | null
-          user_id: string
+          channels_count: number | null
+          created_at: string | null
+          id: number
+          logo_url: string | null
+          monthly_price: number
+          package_name: string
+          premium_channels: boolean | null
+          provider: string
+          sports_channels: boolean | null
+          streaming_included: boolean | null
+          url: string | null
         }
         Insert: {
-          created_at?: string
-          id?: string
-          offer_id?: string | null
-          provider_id?: string | null
-          user_id: string
+          channels_count?: number | null
+          created_at?: string | null
+          id?: number
+          logo_url?: string | null
+          monthly_price: number
+          package_name: string
+          premium_channels?: boolean | null
+          provider: string
+          sports_channels?: boolean | null
+          streaming_included?: boolean | null
+          url?: string | null
         }
         Update: {
-          created_at?: string
-          id?: string
-          offer_id?: string | null
-          provider_id?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_favorites_offer_id_fkey"
-            columns: ["offer_id"]
-            isOneToOne: false
-            referencedRelation: "provider_offers"
-            referencedColumns: ["offer_id"]
-          },
-          {
-            foreignKeyName: "user_favorites_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
-            referencedRelation: "providers"
-            referencedColumns: ["provider_id"]
-          },
-        ]
-      }
-      user_profiles: {
-        Row: {
-          avatar_url: string | null
-          created_at: string
-          email: string | null
-          favorites: Json | null
-          first_name: string | null
-          full_name: string | null
-          is_admin: boolean | null
-          last_name: string | null
-          phone: string | null
-          preferred_language: string | null
-          settings: Json | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          favorites?: Json | null
-          first_name?: string | null
-          full_name?: string | null
-          is_admin?: boolean | null
-          last_name?: string | null
-          phone?: string | null
-          preferred_language?: string | null
-          settings?: Json | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          favorites?: Json | null
-          first_name?: string | null
-          full_name?: string | null
-          is_admin?: boolean | null
-          last_name?: string | null
-          phone?: string | null
-          preferred_language?: string | null
-          settings?: Json | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      user_reviews: {
-        Row: {
-          comment: string | null
-          created_at: string
-          provider_id: string
-          rating: number
-          review_id: string
-          user_id: string
-        }
-        Insert: {
-          comment?: string | null
-          created_at?: string
-          provider_id: string
-          rating: number
-          review_id?: string
-          user_id: string
-        }
-        Update: {
-          comment?: string | null
-          created_at?: string
-          provider_id?: string
-          rating?: number
-          review_id?: string
-          user_id?: string
+          channels_count?: number | null
+          created_at?: string | null
+          id?: number
+          logo_url?: string | null
+          monthly_price?: number
+          package_name?: string
+          premium_channels?: boolean | null
+          provider?: string
+          sports_channels?: boolean | null
+          streaming_included?: boolean | null
+          url?: string | null
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      unique_municipalities: {
+        Row: {
+          clean_name: string | null
+          offer_count: number | null
+          original_name: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      refresh_unique_municipalities: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
@@ -553,21 +577,25 @@ export type Database = {
   }
 }
 
-type DefaultSchema = Database[Extract<keyof Database, "public">]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
     ? R
@@ -585,14 +613,16 @@ export type Tables<
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
@@ -608,14 +638,16 @@ export type TablesInsert<
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
@@ -631,14 +663,16 @@ export type TablesUpdate<
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
     : never
@@ -646,14 +680,16 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
-> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

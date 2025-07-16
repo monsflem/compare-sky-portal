@@ -1,47 +1,90 @@
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-react';
+import NorwegianFlag from '@/components/flags/NorwegianFlag';
+import BritishFlag from '@/components/flags/BritishFlag';
 
-const LanguageSelector = () => {
-  const { language, setLanguage, t } = useLanguage();
+// Import languages from context to ensure consistency
+import { languages } from '@/contexts/LanguageContext';
 
-  const languages = [
-    { code: 'no' as const, name: 'Norsk', flag: '🇳🇴' },
-    { code: 'en' as const, name: 'English', flag: '🇬🇧' }
-  ];
+// Component to render flag with fallback
+const FlagDisplay = ({ flagComponent }: { flagComponent: string }) => {
+  const flagProps = { className: "w-5 h-5" };
+  
+  switch (flagComponent) {
+    case 'norwegian':
+      return <NorwegianFlag {...flagProps} />;
+    case 'british':
+      return <BritishFlag {...flagProps} />;
+    default:
+      return <div className="w-5 h-5 bg-gray-200 rounded-full flex-shrink-0" />;
+  }
+};
 
-  const currentLanguage = languages.find(lang => lang.code === language);
+const LanguageSelector: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
+  const { currentLanguage, setLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  // Find current language with fallback to ensure flag display
+  const currentLang = languages.find(lang => lang.code === currentLanguage.code) || languages[0];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleLanguageSelect = (language: typeof languages[0]) => {
+    console.log('🌍 Language changed to:', language.name, language.code);
+    setLanguage(language);
+    setIsOpen(false);
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2">
-          <span>{currentLanguage?.flag}</span>
-          <span className="hidden sm:inline">{currentLanguage?.name}</span>
-          <ChevronDown className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {languages.map((lang) => (
-          <DropdownMenuItem
-            key={lang.code}
-            onClick={() => setLanguage(lang.code)}
-            className={language === lang.code ? 'bg-slate-100' : ''}
-          >
-            <span className="mr-2">{lang.flag}</span>
-            {lang.name}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-2 h-10 bg-card/30 text-card-foreground border border-border/50 hover:bg-accent/60 hover:text-primary hover:border-primary/60 transition-all duration-300 rounded-lg font-medium text-sm ${
+          isMobile ? 'w-10 justify-center' : 'px-3'
+        }`}
+      >
+        <FlagDisplay flagComponent={currentLang.flagComponent} />
+        {!isMobile && (
+          <>
+            <span className="font-medium">{currentLang.name}</span>
+            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+          </>
+        )}
+      </button>
+
+      {isOpen && (
+        <div className={`absolute top-full mt-2 min-w-[160px] bg-card border border-border shadow-xl rounded-lg py-2 z-[110] ${
+          isMobile ? 'right-0' : 'left-0'
+        }`}>
+          {languages.map((language) => (
+            <button
+              key={language.code}
+              onClick={() => handleLanguageSelect(language)}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-accent transition-colors ${
+                currentLanguage.code === language.code ? 'bg-accent text-primary font-semibold' : 'text-card-foreground'
+              }`}
+            >
+              <FlagDisplay flagComponent={language.flagComponent} />
+              <span className="font-medium">{language.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

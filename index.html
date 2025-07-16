@@ -1,45 +1,23 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prispilot - Compare Prices in Norway</title>
-    <meta name="description" content="Professional price comparison platform for Norwegian consumers. Compare insurance, electricity, mobile plans, and loans." />
-    <meta name="author" content="Prispilot" />
-
-    <meta property="og:title" content="Prispilot - Compare Prices in Norway" />
-    <meta property="og:description" content="Professional price comparison platform for Norwegian consumers. Compare insurance, electricity, mobile plans, and loans." />
-    <meta property="og:type" content="website" />
-    <!-- Removed lovable.dev image -->
-    <meta property="og:image" content="/assets/opengraph-image.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@prispilot" />
-    <!-- Removed lovable.dev image -->
-    <meta name="twitter:image" content="/assets/opengraph-image.png" />
-
-    <script>
-      // Redirect if loaded on a non-root URL (GitHub Pages SPA fix)
-      (function () {
-        const basePath = "/compare-sky-portal/";
-        if (
-          window.location.pathname !== basePath &&
-          !window.location.pathname.startsWith(basePath)
-        ) {
-          window.history.replaceState(
-            {},
-            "",
-            basePath + window.location.pathname.replace(/^\/+/, "")
-          );
-        }
-      })();
-    </script>
+    <meta name="permissions-policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:;" />
+    <title>PrisPilot - Sammenlign priser på strøm, internett, forsikring og mer</title>
+    <meta name="description" content="PrisPilot hjelper deg å sammenligne priser på strøm, internett, mobilabonnement, forsikring, bank, lån og boligalarm. Få beste tilbud på markedet." />
+    <meta name="author" content="PrisPilot" />
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
